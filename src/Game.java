@@ -13,12 +13,16 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.awt.Panel;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
 import java.util.Timer;
 import javafx.util.*;
 
 import javafx.scene.paint.Color;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 public class Game extends Application{
@@ -29,19 +33,53 @@ public class Game extends Application{
 		
 		GameObject.setPane(pane);
 		
+		Stack<KeyCode> keyStack=new Stack<KeyCode>();
+		
 		Character player=new Character();
-		Brick brick1=new Brick(10,10,true);
+		new Brick(10,10,true);
+		new Brick(12,10,true);
+		new Brick(13,10,true);
+		new Brick(13,11,true);
 		
 		pane.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent event) {
 				// TODO Auto-generated method stub
-				switch(event.getCode()) {
+				if(!keyStack.contains(event.getCode()))
+					keyStack.push(event.getCode());
+				switch(keyStack.lastElement()) {
 				case UP:
 					player.setDir(Movable.Dir.up);
 					break;
 				case DOWN:
-					player.setDir(Movable.Dir.down);
+				    player.setDir(Movable.Dir.down);
+					break;
+				case LEFT:
+					player.setDir(Movable.Dir.left);
+					break;
+				case RIGHT:
+					player.setDir(Movable.Dir.right);
+					break;
+				case SPACE:
+					player.setBomb();
+					break;
+				default:
+					break;
+				}
+			}	
+		});
+		
+		pane.setOnKeyReleased(e->{
+			keyStack.removeElement(e.getCode());
+			if(keyStack.isEmpty())
+				player.setDir(Movable.Dir.stop);
+			else {
+				switch(keyStack.lastElement()) {
+				case UP:
+					player.setDir(Movable.Dir.up);
+					break;
+				case DOWN:
+			    	player.setDir(Movable.Dir.down);
 					break;
 				case LEFT:
 					player.setDir(Movable.Dir.left);
@@ -52,11 +90,8 @@ public class Game extends Application{
 				default:
 					break;
 				}
-			}	
-		});
-		
-		pane.setOnKeyReleased(e->{
-			switch(e.getCode()) {
+			}
+			/*switch(e.getCode()) {
 			case DOWN:
 				if(player.getDir()==Movable.Dir.down)
 					player.setDir(Movable.Dir.stop);
@@ -75,11 +110,20 @@ public class Game extends Application{
 				break;
 			default:
 				break;
-			}
+			}*/
 		});
 		
 		EventHandler<ActionEvent> eventHandler = e->{
-			player.move();
+			player.act();
+			
+			GameObject o;
+			for(int i=0;i<GameObject.getMapSize();i++) {
+				for(int j=0;j<GameObject.getMapSize();j++) {
+					o=GameObject.allObjects[i][j];
+					if(o!=null)
+						o.act();
+				}
+			}
 		};
 		
 		Timeline animation=new Timeline(new KeyFrame(Duration.millis(20),eventHandler));

@@ -1,3 +1,4 @@
+import java.util.Random;
 
 public class Brick extends GameObject{
 	
@@ -19,8 +20,12 @@ public class Brick extends GameObject{
 	}
 
 	@Override
-	public void destroy() {
+	public void destroy() { 
 		GameObject.getPane().getChildren().remove(getCollisionBody());
 		GameObject.allObjects[getXInMatrix()][getYInMatrix()]=null;
+		Random rand=new Random();
+		//int isSet=rand.nextInt()%4;
+		//if(isSet==0)
+			new Eatable(getXInMatrix(),getYInMatrix());
 	}
 }
