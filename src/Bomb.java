@@ -46,6 +46,11 @@ public class Bomb extends GameObject{
 					o.destroy();
 					new FireWork(getXInMatrix(),getYInMatrix()+i);
 				}
+				else if (o.getType()==Type.CHARACTER) {
+					Character tmpCharacter;
+					o.destroy();
+					//characterÀ¿Õˆ
+				}
 			}
 		}
 		
@@ -73,6 +78,10 @@ public class Bomb extends GameObject{
 				else if(o.getType()==Type.EATABLE) {
 					o.destroy();
 					new FireWork(getXInMatrix(),getYInMatrix()+i);
+				}//≈–∂œo «≤ª «character
+				else if (o.getType()==Type.CHARACTER) {
+					o.destroy();
+					//characterÀ¿Õˆ
 				}
 			}
 		}
@@ -101,6 +110,10 @@ public class Bomb extends GameObject{
 					o.destroy();
 					new FireWork(getXInMatrix(),getYInMatrix()+i);
 				}
+				else if (o.getType()==Type.CHARACTER) {
+					o.destroy();
+					//characterÀ¿Õˆ
+				}
 			}
 		}
 		
@@ -126,6 +139,10 @@ public class Bomb extends GameObject{
 				else if(o.getType()==Type.EATABLE) {
 					o.destroy();
 					new FireWork(getXInMatrix(),getYInMatrix()+i);
+				}
+				else if (o.getType()==Type.CHARACTER) {
+					o.destroy();
+					//characterÀ¿Õˆ
 				}
 			}
 		}

@@ -6,6 +6,7 @@ public class Character extends GameObject implements Movable{
 	public static List<Character> characters=new ArrayList<Character>();
 	
 	private Dir dir=Dir.stop; 
+	boolean isPlayer = true;
 	private	int speed=5;
 	private int health=3;
 	private int bombNum=1;
@@ -17,7 +18,14 @@ public class Character extends GameObject implements Movable{
 		allObjects[getXInMatrix()][getYInMatrix()]=null;
 		characters.add(this);
 	}
-	
+	public boolean isPlayer() {
+		return isPlayer;
+	}
+
+	public void setPlayer(boolean isPlayer) {
+		this.isPlayer = isPlayer;
+	}
+
 	public Dir getDir() {return dir;}
 	
 	public void setDir(Dir _dir) {dir=_dir;}
@@ -48,7 +56,7 @@ public class Character extends GameObject implements Movable{
 		double y=getY();
 		int size=getSize();
 		
-		if((x<=0&&dir==Dir.left)||(x>=mapSize*size&&dir==Dir.right)||(y<=0&&dir==Dir.up)||(y>=mapSize*size&&dir==Dir.down)) {
+		if((x<=0&&dir==Dir.left)||(x>=(mapSize-1)*size&&dir==Dir.right)||(y<=0&&dir==Dir.up)||((y>=(mapSize-1) * size) &&dir==Dir.down)) {
 			return;
 		}
 		
