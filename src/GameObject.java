@@ -17,13 +17,13 @@ public abstract class GameObject {
 	
 	public static int getSize() {return size;}
 	
-	private Rectangle collisionBody=new Rectangle(0,0,size,size);
+	private Rectangle collisionBody=new Rectangle(0,0,size,size);//碰撞体为正方形
 	private Type type;//物体种类
-	private boolean isCollider=true;
+	private boolean isCollider=true;//是否为碰撞体的标签
 	private long timer=new Date().getTime();//代码执行时间计时器
 	
-	public static int mapSize=20;
-	public static GameObject[][] allObjects=new GameObject[mapSize][mapSize];
+	public static int mapSize=20;//地图矩阵的大小
+	public static GameObject[][] allObjects=new GameObject[mapSize][mapSize];//地图矩阵
 	
 	public static int getMapSize() {return mapSize;}
 	
@@ -60,16 +60,19 @@ public abstract class GameObject {
 	
 	public void setY(double _y) {collisionBody.setY(_y);;}
 	
-	public int getXInMatrix() {return ((int)collisionBody.getX()+size/2)/size;}
+	public int getXInMatrix() {return ((int)collisionBody.getX()+size/2)/size;}//获取该物体在矩阵中的X
 	
-	public int getYInMatrix() {return ((int)collisionBody.getY()+size/2)/size;}
+	public int getYInMatrix() {return ((int)collisionBody.getY()+size/2)/size;}//获取该物体在矩阵中的Y
 	
 	public Rectangle getCollisionBody() {return collisionBody;}
 	
+	
+	//判断一个物体是否与另一物体相交
 	public boolean intersect(GameObject other) {
 		return collisionBody.intersects(other.collisionBody.getBoundsInLocal());
 	}
 	
+	//获取所有与该物体相交的其他物体
 	public List<GameObject> getColliders(){
 		List<GameObject> colliders=new ArrayList<GameObject>();
 		for(int i=0;i<mapSize;i++) {
@@ -92,5 +95,6 @@ public abstract class GameObject {
 	
 	public abstract void act();//物体每一帧将要执行的动作
 	
+	//物体被摧毁时执行的逻辑
 	public abstract void destroy();
 }
