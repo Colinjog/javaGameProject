@@ -19,7 +19,7 @@ public class Bomb extends GameObject{
 	public void explode() {
 		Brick tmpBrick;
 		Bomb tmpBomb;
-		
+		Character tmpCharacter;
 		destroy();
 		
 		new FireWork(getXInMatrix(),getYInMatrix(),_imagePath);
@@ -47,6 +47,35 @@ public class Bomb extends GameObject{
 				else if(o.getType()==Type.EATABLE) {
 					o.destroy();
 					new FireWork(getXInMatrix(),getYInMatrix()+i,_imagePath);
+				}
+				else if (o.getType()==Type.CHARACTER) {
+					tmpCharacter = (Character)o;
+					int health = tmpCharacter.getHealth();
+					if (tmpCharacter.isPlayer()) {
+						if (health>1) {
+							health--;
+							tmpCharacter.setHealth(health);
+							//玩家被炸弹击中,但玩家还有生命
+							new FireWork(getXInMatrix(),getYInMatrix()+i,_imagePath);
+						}
+						else {
+							o.destroy();
+							new FireWork(getXInMatrix(),getYInMatrix()+i,_imagePath);
+							//游戏结束
+						}
+					}
+					else {
+						if (health>1) {
+							health--;
+							tmpCharacter.setHealth(health);
+							new FireWork(getXInMatrix(),getYInMatrix()+i,_imagePath);
+							//电脑玩家被炸弹击中,但电脑玩家还有生命
+						}
+						else {
+							o.destroy();
+							new FireWork(getXInMatrix(),getYInMatrix()+i,_imagePath);
+						}
+					}
 				}
 			}
 		}
@@ -76,6 +105,35 @@ public class Bomb extends GameObject{
 					o.destroy();
 					new FireWork(getXInMatrix(),getYInMatrix()+i,_imagePath);
 				}
+				else if (o.getType()==Type.CHARACTER) {
+					tmpCharacter = (Character)o;
+					int health = tmpCharacter.getHealth();
+					if (tmpCharacter.isPlayer()) {
+						if (health>1) {
+							health--;
+							tmpCharacter.setHealth(health);
+							//玩家被炸弹击中,但玩家还有生命
+							new FireWork(getXInMatrix(),getYInMatrix()+i,_imagePath);
+						}
+						else {
+							o.destroy();
+							new FireWork(getXInMatrix(),getYInMatrix()+i,_imagePath);
+							//游戏结束
+						}
+					}
+					else {
+						if (health>1) {
+							health--;
+							tmpCharacter.setHealth(health);
+							new FireWork(getXInMatrix(),getYInMatrix()+i,_imagePath);
+							//电脑玩家被炸弹击中,但电脑玩家还有生命
+						}
+						else {
+							o.destroy();
+							new FireWork(getXInMatrix(),getYInMatrix()+i,_imagePath);
+						}
+					}
+				}
 			}
 		}
 		
@@ -103,6 +161,35 @@ public class Bomb extends GameObject{
 					o.destroy();
 					new FireWork(getXInMatrix(),getYInMatrix()+i,_imagePath);
 				}
+				else if (o.getType()==Type.CHARACTER) {
+					tmpCharacter = (Character)o;
+					int health = tmpCharacter.getHealth();
+					if (tmpCharacter.isPlayer()) {
+						if (health>1) {
+							health--;
+							tmpCharacter.setHealth(health);
+							//玩家被炸弹击中,但玩家还有生命
+							new FireWork(getXInMatrix(),getYInMatrix()+i,_imagePath);
+						}
+						else {
+							o.destroy();
+							new FireWork(getXInMatrix(),getYInMatrix()+i,_imagePath);
+							//游戏结束
+						}
+					}
+					else {
+						if (health>1) {
+							health--;
+							tmpCharacter.setHealth(health);
+							new FireWork(getXInMatrix(),getYInMatrix()+i,_imagePath);
+							//电脑玩家被炸弹击中,但电脑玩家还有生命
+						}
+						else {
+							o.destroy();
+							new FireWork(getXInMatrix(),getYInMatrix()+i,_imagePath);
+						}
+					}
+				}
 			}
 		}
 		
@@ -128,6 +215,35 @@ public class Bomb extends GameObject{
 				else if(o.getType()==Type.EATABLE) {
 					o.destroy();
 					new FireWork(getXInMatrix(),getYInMatrix()+i,_imagePath);
+				}
+				else if (o.getType()==Type.CHARACTER) {
+					tmpCharacter = (Character)o;
+					int health = tmpCharacter.getHealth();
+					if (tmpCharacter.isPlayer()) {
+						if (health>1) {
+							health--;
+							tmpCharacter.setHealth(health);
+							//玩家被炸弹击中,但玩家还有生命
+							new FireWork(getXInMatrix(),getYInMatrix()+i,_imagePath);
+						}
+						else {
+							o.destroy();
+							new FireWork(getXInMatrix(),getYInMatrix()+i,_imagePath);
+							//游戏结束
+						}
+					}
+					else {
+						if (health>1) {
+							health--;
+							tmpCharacter.setHealth(health);
+							new FireWork(getXInMatrix(),getYInMatrix()+i,_imagePath);
+							//电脑玩家被炸弹击中,但电脑玩家还有生命
+						}
+						else {
+							o.destroy();
+							new FireWork(getXInMatrix(),getYInMatrix()+i,_imagePath);
+						}
+					}
 				}
 			}
 		}
