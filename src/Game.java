@@ -36,10 +36,10 @@ public class Game extends Application{
 		Stack<KeyCode> keyStack=new Stack<KeyCode>();
 		
 		Character player=new Character("/character.png",true,"Player1");
-		new Brick(10,10,true,"/character.png");
-		new Brick(12,10,true,"/character.png");
-		new Brick(13,10,true,"/character.png");
-		new Brick(13,11,true,"/character.png");
+		new Brick(10,10,true,"/brick.png");
+		new Brick(12,10,true,"/brick.png");
+		new Brick(13,10,true,"/brick.png");
+		new Brick(13,11,true,"/brick.png");
 		
 		pane.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override

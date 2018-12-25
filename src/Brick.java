@@ -4,12 +4,10 @@ public class Brick extends GameObject{
 	
 
 	private boolean isDestroyable;//×©¿éÊÇ·ñ¿É´Ý»Ù
-	private String _imagePath;
 
 	
 	public Brick(int xInMatrix, int yInMatrix,boolean _isDestroyable,String imagePath) {
 		super(xInMatrix*getSize(),yInMatrix*getSize(),imagePath);
-		_imagePath = imagePath;
 		setIsCollider(true);
 		setType(Type.BRICK);
 		isDestroyable=_isDestroyable;
@@ -34,7 +32,7 @@ public class Brick extends GameObject{
 
 		//int isSet=rand.nextInt()%4;
 		//if(isSet==0)
-			new Eatable(getXInMatrix(),getYInMatrix(),_imagePath);
+			new Eatable(getXInMatrix(),getYInMatrix(),"/eatable.png");
 
 	}
 }

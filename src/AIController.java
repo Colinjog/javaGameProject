@@ -1,6 +1,5 @@
 public class AIController{
-	
-	public void _calculate(){
+	public void analyze(){
 		;
 	}
 }

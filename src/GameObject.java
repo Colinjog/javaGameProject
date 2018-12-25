@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javafx.scene.image.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 
@@ -21,6 +22,8 @@ public abstract class GameObject {
 	private Type type;//物体种类
 	private boolean isCollider=true;//是否为碰撞体的标签
 	private long timer=new Date().getTime();//代码执行时间计时器
+	private Image image;//贴图
+	private ImageView imageView;
 	
 	public static int mapSize=20;//地图矩阵的大小
 	public static GameObject[][] allObjects=new GameObject[mapSize][mapSize];//地图矩阵
@@ -32,16 +35,22 @@ public abstract class GameObject {
 		allObjects=new GameObject[mapSize][mapSize];
 	}
 	
-	public GameObject() {
+	public GameObject(String imagePath) {
+		imageView = new ImageView(image = new Image(imagePath, size, size, false, false));
 		allObjects[getXInMatrix()][getYInMatrix()]=this;
 		pane.getChildren().add(collisionBody);
+		pane.getChildren().add(imageView);
 	}
 	
-	public GameObject(double _x,double _y) {
+	public GameObject(double _x,double _y,String imagePath) {
+		imageView = new ImageView(image = new Image(imagePath, size, size, false, false));
+		imageView.setTranslateX(_x);
+		imageView.setTranslateY(_y);
 		collisionBody.setX(_x);
 		collisionBody.setY(_y);
 		allObjects[getXInMatrix()][getYInMatrix()]=this;
 		pane.getChildren().add(collisionBody);
+		pane.getChildren().add(imageView);
 	}
 	
 	public void setIsCollider(boolean _isCollider) {isCollider=_isCollider;}
@@ -54,17 +63,19 @@ public abstract class GameObject {
 	
 	public double getX() {return collisionBody.getX();}
 	
-	public void setX(double _x) {collisionBody.setX(_x);;}
+	public void setX(double _x) {collisionBody.setX(_x);imageView.setTranslateX(_x);}
 	
 	public double getY() {return collisionBody.getY();}
 	
-	public void setY(double _y) {collisionBody.setY(_y);;}
+	public void setY(double _y) {collisionBody.setY(_y);imageView.setTranslateY(_y);}
 	
 	public int getXInMatrix() {return ((int)collisionBody.getX()+size/2)/size;}//获取该物体在矩阵中的X
 	
 	public int getYInMatrix() {return ((int)collisionBody.getY()+size/2)/size;}//获取该物体在矩阵中的Y
 	
 	public Rectangle getCollisionBody() {return collisionBody;}
+
+	public ImageView getImageView() {return imageView;}
 	
 	
 	//判断一个物体是否与另一物体相交

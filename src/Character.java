@@ -15,15 +15,9 @@ public class Character extends GameObject implements Movable{
 	private int health=3;//生命值
 	private int bombNum=1;//所持炸弹数量
 	private int bombPower=1;//炸弹威力
-	private String _imagePath;
-	public boolean isPlayer() {
-		return isPlayer;
-	}
+
 	{
 		setIsCollider(false);//人物不为碰撞体
-	}
-	public void setPlayer(boolean isPlayer) {
-		this.isPlayer = isPlayer;
 	}
 
 	public String getName() {
@@ -37,14 +31,20 @@ public class Character extends GameObject implements Movable{
 		super(imagePath);
 		setPlayer(_isPlayer);
 		this.name = name;
-		_imagePath = imagePath;
 		setIsCollider(false);
 
 		setType(Type.CHARACTER);
 		allObjects[getXInMatrix()][getYInMatrix()]=null;//人物不处于矩阵中（因为人物可以和炸弹还有火花重合，放在矩阵中不行。。。如果再复杂点这样处理绝对有问题）
 		characters.add(this);
 	}
-	
+
+	public boolean isPlayer() {
+		return isPlayer;
+	}
+
+	public void setPlayer(boolean isPlayer) {
+		this.isPlayer = isPlayer;
+	}
 
 	public Dir getDir() {return dir;}
 	
@@ -151,7 +151,7 @@ public class Character extends GameObject implements Movable{
 	
 	public void setBomb() {//放置炸弹
 		if(bombNum>0&&allObjects[getXInMatrix()][getYInMatrix()]==null) {
-			new Bomb(getXInMatrix(),getYInMatrix(),bombPower,this,_imagePath);
+			new Bomb(getXInMatrix(),getYInMatrix(),bombPower,this,"/bomb.png");
 			bombNum-=1;
 		}
 	}

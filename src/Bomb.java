@@ -6,12 +6,11 @@ public class Bomb extends GameObject{
 	private int power;//炸弹威力
 	private Character setter;//放置炸弹的人物
 
-	String _imagePath;
-
+	String _imagePath;//path of firework image
 	
 	public Bomb(int _xInMatrix,int _yInMatrix,int _power, Character _setter,String imagePath) {
 		super(_xInMatrix*getSize(),_yInMatrix*getSize(),imagePath);
-		_imagePath = imagePath;
+		_imagePath = "/firework.png";
 		bombTime=2000;
 		power=_power;
 		setter=_setter;
@@ -39,7 +38,7 @@ public class Bomb extends GameObject{
 				new FireWork(getXInMatrix()+i,getYInMatrix(),_imagePath);
 
 			else {
-				if(o.getType()==Type.BRICK) {//如果是砖块，这停止判断
+				if(o.getType()==Type.BRICK) {//如果是砖块，则停止判断
 					tmpBrick=(Brick)o;
 					if(tmpBrick.getIsDestroyable()) {
 						tmpBrick.destroy();
@@ -115,12 +114,12 @@ public class Bomb extends GameObject{
 				}
 				else if(o.getType()==Type.EATABLE) {
 					o.destroy();
-					new FireWork(getXInMatrix(),getYInMatrix()+i,_imagePath);
+					new FireWork(getXInMatrix(),getYInMatrix()-i,_imagePath);
 				}//判断o是不是character
 				else if (o.getType()==Type.CHARACTER) {
 					o.destroy();
 					//character死亡
-					new FireWork(getXInMatrix(),getYInMatrix()+i,_imagePath);
+					new FireWork(getXInMatrix(),getYInMatrix()-i,_imagePath);
 
 				}
 				else if (o.getType()==Type.CHARACTER) {
@@ -131,11 +130,11 @@ public class Bomb extends GameObject{
 							health--;
 							tmpCharacter.setHealth(health);
 							//玩家被炸弹击中,但玩家还有生命
-							new FireWork(getXInMatrix(),getYInMatrix()+i,_imagePath);
+							new FireWork(getXInMatrix(),getYInMatrix()-i,_imagePath);
 						}
 						else {
 							o.destroy();
-							new FireWork(getXInMatrix(),getYInMatrix()+i,_imagePath);
+							new FireWork(getXInMatrix(),getYInMatrix()-i,_imagePath);
 							//游戏结束
 						}
 					}
@@ -143,12 +142,12 @@ public class Bomb extends GameObject{
 						if (health>1) {
 							health--;
 							tmpCharacter.setHealth(health);
-							new FireWork(getXInMatrix(),getYInMatrix()+i,_imagePath);
+							new FireWork(getXInMatrix(),getYInMatrix()-i,_imagePath);
 							//电脑玩家被炸弹击中,但电脑玩家还有生命
 						}
 						else {
 							o.destroy();
-							new FireWork(getXInMatrix(),getYInMatrix()+i,_imagePath);
+							new FireWork(getXInMatrix(),getYInMatrix()-i,_imagePath);
 						}
 					}
 				}
@@ -234,7 +233,7 @@ public class Bomb extends GameObject{
 				}
 				else if(o.getType()==Type.EATABLE) {
 					o.destroy();
-					new FireWork(getXInMatrix(),getYInMatrix()+i,_imagePath);
+					new FireWork(getXInMatrix(),getYInMatrix()-i,_imagePath);
 				}
 				else if (o.getType()==Type.CHARACTER) {
 
@@ -245,11 +244,11 @@ public class Bomb extends GameObject{
 							health--;
 							tmpCharacter.setHealth(health);
 							//玩家被炸弹击中,但玩家还有生命
-							new FireWork(getXInMatrix(),getYInMatrix()+i,_imagePath);
+							new FireWork(getXInMatrix(),getYInMatrix()-i,_imagePath);
 						}
 						else {
 							o.destroy();
-							new FireWork(getXInMatrix(),getYInMatrix()+i,_imagePath);
+							new FireWork(getXInMatrix(),getYInMatrix()-i,_imagePath);
 							//游戏结束
 						}
 					}
@@ -257,12 +256,12 @@ public class Bomb extends GameObject{
 						if (health>1) {
 							health--;
 							tmpCharacter.setHealth(health);
-							new FireWork(getXInMatrix(),getYInMatrix()+i,_imagePath);
+							new FireWork(getXInMatrix(),getYInMatrix()-i,_imagePath);
 							//电脑玩家被炸弹击中,但电脑玩家还有生命
 						}
 						else {
 							o.destroy();
-							new FireWork(getXInMatrix(),getYInMatrix()+i,_imagePath);
+							new FireWork(getXInMatrix(),getYInMatrix()-i,_imagePath);
 						}
 					}
 
