@@ -3,10 +3,6 @@ import java.util.List;
 
 public class Character extends GameObject implements Movable{
 	
-
-	
-	
-
 	public static List<Character> characters=new ArrayList<Character>();
 	private boolean isPlayer = true;//是玩家还是机器人
 	private String name = "";//人物的名字,或机器人的名字
@@ -78,7 +74,6 @@ public class Character extends GameObject implements Movable{
 		
 
 		if((x<=0&&dir==Dir.left)||(x>=(mapSize-1)*size&&dir==Dir.right)||(y<=0&&dir==Dir.up)||(y>=(mapSize-1)*size&&dir==Dir.down)) {
-
 			return;
 		}
 		

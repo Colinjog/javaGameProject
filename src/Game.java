@@ -33,9 +33,14 @@ public class Game extends Application{
 		
 		GameObject.setPane(pane);
 		
-		Stack<KeyCode> keyStack=new Stack<KeyCode>();
+		Stack<KeyCode> keyStack = new Stack<KeyCode>();
 		
-		Character player=new Character("/character.png",true,"Player1");
+		Character player = new Character("/character.png",true,"Player1");
+
+		AIController bot = new AIController(new Character("/character.png", false, "Bot1"));
+		bot.getBody().setX(200);
+		bot.getBody().setY(200);
+
 		new Brick(10,10,true,"/brick.png");
 		new Brick(12,10,true,"/brick.png");
 		new Brick(13,10,true,"/brick.png");
@@ -93,8 +98,9 @@ public class Game extends Application{
 			}
 		});
 		
-		EventHandler<ActionEvent> eventHandler = e->{
+		EventHandler<ActionEvent> eventHandler = e->{ //called every frame
 			player.act();
+			bot.act();
 			
 			GameObject o;
 			for(int i=0;i<GameObject.getMapSize();i++) {
