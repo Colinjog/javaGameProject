@@ -6,7 +6,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 
 public abstract class GameObject {
-	enum Type{CHARACTER,BRICK,BOMB,FIREWORK}//物体的类型标签
+	enum Type{CHARACTER,BRICK,BOMB,FIREWORK,EATABLE}//物体的类型标签
 	
 	private static final int size=50;//每个物体的默认大小
 	private static Pane pane;//绘制窗口
@@ -24,6 +24,8 @@ public abstract class GameObject {
 	
 	public static int mapSize=20;
 	public static GameObject[][] allObjects=new GameObject[mapSize][mapSize];
+	
+	public static int getMapSize() {return mapSize;}
 	
 	public static void setMapSize(int _mapSize) {
 		mapSize=_mapSize;
