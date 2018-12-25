@@ -5,6 +5,7 @@ public class Character extends GameObject implements Movable{
 	
 	public static List<Character> characters=new ArrayList<Character>();//储存所有人物的列表
 	
+
 	private boolean isPlayer = true;
 	private Dir dir=Dir.stop; //移动方向
 	private	int speed=5;//移动速度
@@ -15,6 +16,14 @@ public class Character extends GameObject implements Movable{
 	
 	{
 		setIsCollider(false);//人物不为碰撞体
+	}
+	private String _imagePath;
+	
+	public Character(String imagePath){
+		super(imagePath);
+		_imagePath = imagePath;
+		setIsCollider(false);
+
 		setType(Type.CHARACTER);
 		allObjects[getXInMatrix()][getYInMatrix()]=null;//人物不处于矩阵中（因为人物可以和炸弹还有火花重合，放在矩阵中不行。。。如果再复杂点这样处理绝对有问题）
 		characters.add(this);
@@ -133,7 +142,7 @@ public class Character extends GameObject implements Movable{
 	
 	public void setBomb() {//放置炸弹
 		if(bombNum>0&&allObjects[getXInMatrix()][getYInMatrix()]==null) {
-			new Bomb(getXInMatrix(),getYInMatrix(),bombPower,this);
+			new Bomb(getXInMatrix(),getYInMatrix(),bombPower,this,_imagePath);
 			bombNum-=1;
 		}
 	}

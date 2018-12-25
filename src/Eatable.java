@@ -8,12 +8,8 @@ public class Eatable extends GameObject{
 	
 	private Function func;
 	
-	public Eatable(Function _func) {
-		func=_func;
-	}
-	
-	public Eatable(int xInMatrix,int yInMatrix) {
-		super(xInMatrix*getSize(),yInMatrix*getSize());
+	public Eatable(int xInMatrix,int yInMatrix,String imagePath) {
+		super(xInMatrix*getSize(),yInMatrix*getSize(),imagePath);
 		setType(GameObject.Type.EATABLE);
 		
 		this.setIsCollider(false);
@@ -75,6 +71,7 @@ public class Eatable extends GameObject{
 	public void destroy() {
 		// TODO Auto-generated method stub
 		GameObject.getPane().getChildren().remove(getCollisionBody());
+		GameObject.getPane().getChildren().remove(getImageView());
 		GameObject.allObjects[getXInMatrix()][getYInMatrix()]=null;
 	}
 
