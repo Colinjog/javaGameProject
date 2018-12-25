@@ -91,26 +91,6 @@ public class Game extends Application{
 					break;
 				}
 			}
-			/*switch(e.getCode()) {
-			case DOWN:
-				if(player.getDir()==Movable.Dir.down)
-					player.setDir(Movable.Dir.stop);
-				break;
-			case UP:
-				if(player.getDir()==Movable.Dir.up)
-					player.setDir(Movable.Dir.stop);
-				break;
-			case LEFT:
-				if(player.getDir()==Movable.Dir.left)
-					player.setDir(Movable.Dir.stop);
-				break;
-			case RIGHT:
-				if(player.getDir()==Movable.Dir.right)
-					player.setDir(Movable.Dir.stop);
-				break;
-			default:
-				break;
-			}*/
 		});
 		
 		EventHandler<ActionEvent> eventHandler = e->{

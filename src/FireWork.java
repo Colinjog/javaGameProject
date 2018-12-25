@@ -1,7 +1,7 @@
 
 public class FireWork extends GameObject{
 	
-	public int existTime=250;
+	public int existTime=250;//火焰的存在时间
 	
 	public FireWork(int _xInMatrix,int _yInMatrix) {
 		super(_xInMatrix*getSize(),_yInMatrix*getSize());

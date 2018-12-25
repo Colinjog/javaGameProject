@@ -18,11 +18,13 @@ public class Eatable extends GameObject{
 		
 		this.setIsCollider(false);
 		
+		//将道具缩小并且置于格子中间（只要后面没有什么道具移动或者碰撞功能什么的这样写应该没有问题）
 		getCollisionBody().setX(getX()+12.5);
 		getCollisionBody().setY(getY()+12.5);
 		getCollisionBody().setWidth(25);
 		getCollisionBody().setHeight(25);
 		
+		//随机生成道具种类
 		Random rand=new Random();
 		switch(rand.nextInt(4)) {
 		case 0:
