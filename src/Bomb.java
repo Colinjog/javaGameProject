@@ -4,9 +4,11 @@ public class Bomb extends GameObject{
 	private int bombTime;
 	private int power;
 	private Character setter;
+	String _imagePath;
 	
-	public Bomb(int _xInMatrix,int _yInMatrix,int _power, Character _setter) {
-		super(_xInMatrix*getSize(),_yInMatrix*getSize());
+	public Bomb(int _xInMatrix,int _yInMatrix,int _power, Character _setter,String imagePath) {
+		super(_xInMatrix*getSize(),_yInMatrix*getSize(),imagePath);
+		_imagePath = imagePath;
 		bombTime=2000;
 		power=_power;
 		setter=_setter;
@@ -20,12 +22,12 @@ public class Bomb extends GameObject{
 		
 		destroy();
 		
-		new FireWork(getXInMatrix(),getYInMatrix());
+		new FireWork(getXInMatrix(),getYInMatrix(),_imagePath);
 		
 		for(int i=1;i<=power&&getXInMatrix()+i<getMapSize();i++) {
 			GameObject o=allObjects[getXInMatrix()+i][getYInMatrix()];
 			if(o==null)
-				new FireWork(getXInMatrix()+i,getYInMatrix());
+				new FireWork(getXInMatrix()+i,getYInMatrix(),_imagePath);
 			else {
 				if(o.getType()==Type.BRICK) {
 					tmpBrick=(Brick)o;
@@ -40,11 +42,11 @@ public class Bomb extends GameObject{
 				}
 				else if(o.getType()==Type.FIREWORK) {
 					o.destroy();
-					new FireWork(getXInMatrix()+i,getYInMatrix());
+					new FireWork(getXInMatrix()+i,getYInMatrix(),_imagePath);
 				}
 				else if(o.getType()==Type.EATABLE) {
 					o.destroy();
-					new FireWork(getXInMatrix(),getYInMatrix()+i);
+					new FireWork(getXInMatrix(),getYInMatrix()+i,_imagePath);
 				}
 			}
 		}
@@ -52,7 +54,7 @@ public class Bomb extends GameObject{
 		for(int i=1;i<=power&&getXInMatrix()-i>=0;i++) {
 			GameObject o=allObjects[getXInMatrix()-i][getYInMatrix()];
 			if(o==null)
-				new FireWork(getXInMatrix()-i,getYInMatrix());
+				new FireWork(getXInMatrix()-i,getYInMatrix(),_imagePath);
 			else {
 				if(o.getType()==Type.BRICK) {
 					tmpBrick=(Brick)o;
@@ -68,11 +70,11 @@ public class Bomb extends GameObject{
 				}
 				else if(o.getType()==Type.FIREWORK) {
 					o.destroy();
-					new FireWork(getXInMatrix()-i,getYInMatrix());
+					new FireWork(getXInMatrix()-i,getYInMatrix(),_imagePath);
 				}
 				else if(o.getType()==Type.EATABLE) {
 					o.destroy();
-					new FireWork(getXInMatrix(),getYInMatrix()+i);
+					new FireWork(getXInMatrix(),getYInMatrix()+i,_imagePath);
 				}
 			}
 		}
@@ -80,7 +82,7 @@ public class Bomb extends GameObject{
 		for(int i=1;i<=power&&getYInMatrix()+i<getMapSize();i++) {
 			GameObject o=allObjects[getXInMatrix()][getYInMatrix()+i];
 			if(o==null)
-				new FireWork(getXInMatrix(),getYInMatrix()+i);
+				new FireWork(getXInMatrix(),getYInMatrix()+i,_imagePath);
 			else {
 				if(o.getType()==Type.BRICK) {
 					tmpBrick=(Brick)o;
@@ -95,11 +97,11 @@ public class Bomb extends GameObject{
 				}
 				else if(o.getType()==Type.FIREWORK) {
 					o.destroy();
-					new FireWork(getXInMatrix(),getYInMatrix()+i);
+					new FireWork(getXInMatrix(),getYInMatrix()+i,_imagePath);
 				}
 				else if(o.getType()==Type.EATABLE) {
 					o.destroy();
-					new FireWork(getXInMatrix(),getYInMatrix()+i);
+					new FireWork(getXInMatrix(),getYInMatrix()+i,_imagePath);
 				}
 			}
 		}
@@ -107,7 +109,7 @@ public class Bomb extends GameObject{
 		for(int i=1;i<=power&&getYInMatrix()-i>=0;i++) {
 			GameObject o=allObjects[getXInMatrix()][getYInMatrix()-i];
 			if(o==null)
-				new FireWork(getXInMatrix(),getYInMatrix()-i);
+				new FireWork(getXInMatrix(),getYInMatrix()-i,_imagePath);
 			else {
 				if(o.getType()==Type.BRICK) {
 					tmpBrick=(Brick)o;
@@ -121,11 +123,11 @@ public class Bomb extends GameObject{
 				}
 				else if(o.getType()==Type.FIREWORK) {
 					o.destroy();
-					new FireWork(getXInMatrix(),getYInMatrix()-i);
+					new FireWork(getXInMatrix(),getYInMatrix()-i,_imagePath);
 				}
 				else if(o.getType()==Type.EATABLE) {
 					o.destroy();
-					new FireWork(getXInMatrix(),getYInMatrix()+i);
+					new FireWork(getXInMatrix(),getYInMatrix()+i,_imagePath);
 				}
 			}
 		}
@@ -141,6 +143,7 @@ public class Bomb extends GameObject{
 	@Override
 	public void destroy() {
 		GameObject.getPane().getChildren().remove(getCollisionBody());
+		GameObject.getPane().getChildren().remove(getImageView());
 		GameObject.allObjects[getXInMatrix()][getYInMatrix()]=null;
 		setter.setBombNum(setter.getBombNum()+1);
 	}

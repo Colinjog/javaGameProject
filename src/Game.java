@@ -35,11 +35,11 @@ public class Game extends Application{
 		
 		Stack<KeyCode> keyStack=new Stack<KeyCode>();
 		
-		Character player=new Character();
-		new Brick(10,10,true);
-		new Brick(12,10,true);
-		new Brick(13,10,true);
-		new Brick(13,11,true);
+		Character player=new Character("/character.png");
+		new Brick(10,10,true,"/character.png");
+		new Brick(12,10,true,"/character.png");
+		new Brick(13,10,true,"/character.png");
+		new Brick(13,11,true,"/character.png");
 		
 		pane.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
@@ -131,7 +131,7 @@ public class Game extends Application{
 		animation.setCycleCount(Timeline.INDEFINITE);
 		animation.play();
 		
-		Scene scene=new Scene(pane,1000,1000);
+		Scene scene=new Scene(pane,1200,800);
 		
 		primaryStage.setTitle("Bomb It");
 		primaryStage.setScene(scene);

@@ -10,8 +10,11 @@ public class Character extends GameObject implements Movable{
 	private int health=3;
 	private int bombNum=1;
 	private int bombPower=1;
+	private String _imagePath;
 	
-	{
+	public Character(String imagePath){
+		super(imagePath);
+		_imagePath = imagePath;
 		setIsCollider(false);
 		setType(Type.CHARACTER);
 		allObjects[getXInMatrix()][getYInMatrix()]=null;
@@ -122,7 +125,7 @@ public class Character extends GameObject implements Movable{
 	
 	public void setBomb() {
 		if(bombNum>0&&allObjects[getXInMatrix()][getYInMatrix()]==null) {
-			new Bomb(getXInMatrix(),getYInMatrix(),bombPower,this);
+			new Bomb(getXInMatrix(),getYInMatrix(),bombPower,this,_imagePath);
 			bombNum-=1;
 		}
 	}

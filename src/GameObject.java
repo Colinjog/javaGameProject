@@ -4,6 +4,7 @@ import java.util.List;
 
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.image.*;
 
 public abstract class GameObject {
 	enum Type{CHARACTER,BRICK,BOMB,FIREWORK,EATABLE}//物体的类型标签
@@ -21,6 +22,8 @@ public abstract class GameObject {
 	private Type type;//物体种类
 	private boolean isCollider=true;
 	private long timer=new Date().getTime();//代码执行时间计时器
+	private Image image;
+	private ImageView imageView;
 	
 	public static int mapSize=20;
 	public static GameObject[][] allObjects=new GameObject[mapSize][mapSize];
@@ -32,18 +35,26 @@ public abstract class GameObject {
 		allObjects=new GameObject[mapSize][mapSize];
 	}
 	
-	public GameObject() {
+	public GameObject(String imagePath) {
+		image = new Image(imagePath, size, size, false, false);
+		imageView = new ImageView(image);
 		allObjects[getXInMatrix()][getYInMatrix()]=this;
 		pane.getChildren().add(collisionBody);
+		pane.getChildren().add(imageView);
 	}
 	
-	public GameObject(double _x,double _y) {
+	public GameObject(double _x,double _y, String imagePath) {
+		image = new Image(imagePath, size, size, false, false);
+		imageView = new ImageView(image);
+		imageView.setTranslateX(_x);
+		imageView.setTranslateY(_y);
 		collisionBody.setX(_x);
 		collisionBody.setY(_y);
 		allObjects[getXInMatrix()][getYInMatrix()]=this;
 		pane.getChildren().add(collisionBody);
+		pane.getChildren().add(imageView);
 	}
-	
+
 	public void setIsCollider(boolean _isCollider) {isCollider=_isCollider;}
 	
 	public boolean getIsCollider() {return isCollider;}
@@ -54,17 +65,19 @@ public abstract class GameObject {
 	
 	public double getX() {return collisionBody.getX();}
 	
-	public void setX(double _x) {collisionBody.setX(_x);;}
+	public void setX(double _x) {collisionBody.setX(_x);imageView.setTranslateX(_x);}
 	
 	public double getY() {return collisionBody.getY();}
 	
-	public void setY(double _y) {collisionBody.setY(_y);;}
+	public void setY(double _y) {collisionBody.setY(_y);imageView.setTranslateY(_y);}
 	
 	public int getXInMatrix() {return ((int)collisionBody.getX()+size/2)/size;}
 	
 	public int getYInMatrix() {return ((int)collisionBody.getY()+size/2)/size;}
 	
 	public Rectangle getCollisionBody() {return collisionBody;}
+
+	public ImageView getImageView(){return imageView;}
 	
 	public boolean intersect(GameObject other) {
 		return collisionBody.intersects(other.collisionBody.getBoundsInLocal());
