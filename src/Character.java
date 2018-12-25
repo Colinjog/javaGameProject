@@ -3,32 +3,25 @@ import java.util.List;
 
 public class Character extends GameObject implements Movable{
 	
-<<<<<<< HEAD
-	public static List<Character> characters=new ArrayList<Character>();//储存所有人物的列表
+
+	
 	
 
-	private boolean isPlayer = true;
+	public static List<Character> characters=new ArrayList<Character>();
+	private boolean isPlayer = true;//是玩家还是机器人
+	private String name = "";//人物的名字,或机器人的名字
 	private Dir dir=Dir.stop; //移动方向
 	private	int speed=5;//移动速度
 	private int health=3;//生命值
 	private int bombNum=1;//所持炸弹数量
 	private int bombPower=1;//炸弹威力
-
-	
-	{
-		setIsCollider(false);//人物不为碰撞体
-	}
-=======
-	public static List<Character> characters=new ArrayList<Character>();
-	private boolean isPlayer = true;//是玩家还是机器人
-	private String name = "";//人物的名字,或机器人的名字
-	private Dir dir=Dir.stop; 
-	private	int speed=5;
-	private int health=3;
+	private String _imagePath;
 	public boolean isPlayer() {
 		return isPlayer;
 	}
-
+	{
+		setIsCollider(false);//人物不为碰撞体
+	}
 	public void setPlayer(boolean isPlayer) {
 		this.isPlayer = isPlayer;
 	}
@@ -40,12 +33,6 @@ public class Character extends GameObject implements Movable{
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	private int bombNum=1;
-	private int bombPower=1;
->>>>>>> tmp
-	private String _imagePath;
-	
 	public Character(String imagePath,boolean _isPlayer, String name){
 		super(imagePath);
 		setPlayer(_isPlayer);

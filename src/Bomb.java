@@ -22,13 +22,10 @@ public class Bomb extends GameObject{
 	public void explode() {
 		Brick tmpBrick;
 		Bomb tmpBomb;
-<<<<<<< HEAD
-		
-		destroy();//先在矩阵以及Pane中删除该对象，否则之后创建的新对象会替换掉矩阵中的该对象，图片就留在Pane上去不掉了。。。
-=======
+
 		Character tmpCharacter;
-		destroy();
->>>>>>> tmp
+		destroy();//先在矩阵以及Pane中删除该对象，否则之后创建的新对象会替换掉矩阵中的该对象，图片就留在Pane上去不掉了。。。
+
 		
 
 		new FireWork(getXInMatrix(),getYInMatrix(),_imagePath);//在炸弹位置创建火焰
@@ -62,11 +59,7 @@ public class Bomb extends GameObject{
 					new FireWork(getXInMatrix(),getYInMatrix()+i,_imagePath);
 				}
 				else if (o.getType()==Type.CHARACTER) {
-<<<<<<< HEAD
-					Character tmpCharacter;
-					o.destroy();
-					//character死亡
-=======
+
 					tmpCharacter = (Character)o;
 					int health = tmpCharacter.getHealth();
 					if (tmpCharacter.isPlayer()) {
@@ -94,7 +87,7 @@ public class Bomb extends GameObject{
 							new FireWork(getXInMatrix(),getYInMatrix()+i,_imagePath);
 						}
 					}
->>>>>>> tmp
+
 				}
 			}
 		}
