@@ -44,13 +44,7 @@ public class Character extends GameObject implements Movable{
 		allObjects[getXInMatrix()][getYInMatrix()]=null;//人物不处于矩阵中（因为人物可以和炸弹还有火花重合，放在矩阵中不行。。。如果再复杂点这样处理绝对有问题）
 		characters.add(this);
 	}
-	public boolean isPlayer() {
-		return isPlayer;
-	}
-
-	public void setPlayer(boolean isPlayer) {
-		this.isPlayer = isPlayer;
-	}
+	
 
 	public Dir getDir() {return dir;}
 	
