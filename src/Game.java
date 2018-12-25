@@ -35,7 +35,7 @@ public class Game extends Application{
 		
 		Stack<KeyCode> keyStack=new Stack<KeyCode>();
 		
-		Character player=new Character("/character.png");
+		Character player=new Character("/character.png",true,"Player1");
 		new Brick(10,10,true,"/character.png");
 		new Brick(12,10,true,"/character.png");
 		new Brick(13,10,true,"/character.png");
@@ -111,7 +111,7 @@ public class Game extends Application{
 		animation.setCycleCount(Timeline.INDEFINITE);
 		animation.play();
 		
-		Scene scene=new Scene(pane,1200,800);
+		Scene scene=new Scene(pane,1000,1000);
 		
 		primaryStage.setTitle("Bomb It");
 		primaryStage.setScene(scene);

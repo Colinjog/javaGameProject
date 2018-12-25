@@ -3,6 +3,7 @@ import java.util.List;
 
 public class Character extends GameObject implements Movable{
 	
+<<<<<<< HEAD
 	public static List<Character> characters=new ArrayList<Character>();//储存所有人物的列表
 	
 
@@ -17,10 +18,38 @@ public class Character extends GameObject implements Movable{
 	{
 		setIsCollider(false);//人物不为碰撞体
 	}
+=======
+	public static List<Character> characters=new ArrayList<Character>();
+	private boolean isPlayer = true;//是玩家还是机器人
+	private String name = "";//人物的名字,或机器人的名字
+	private Dir dir=Dir.stop; 
+	private	int speed=5;
+	private int health=3;
+	public boolean isPlayer() {
+		return isPlayer;
+	}
+
+	public void setPlayer(boolean isPlayer) {
+		this.isPlayer = isPlayer;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	private int bombNum=1;
+	private int bombPower=1;
+>>>>>>> tmp
 	private String _imagePath;
 	
-	public Character(String imagePath){
+	public Character(String imagePath,boolean _isPlayer, String name){
 		super(imagePath);
+		setPlayer(_isPlayer);
+		this.name = name;
 		_imagePath = imagePath;
 		setIsCollider(false);
 
@@ -67,8 +96,7 @@ public class Character extends GameObject implements Movable{
 		int size=getSize();
 		
 
-		//判断边界
-		if((x<=0&&dir==Dir.left)||(x>=mapSize*size-size&&dir==Dir.right)||(y<=0&&dir==Dir.up)||(y>=mapSize*size-size&&dir==Dir.down)) {
+		if((x<=0&&dir==Dir.left)||(x>=(mapSize-1)*size&&dir==Dir.right)||(y<=0&&dir==Dir.up)||(y>=(mapSize-1)*size&&dir==Dir.down)) {
 
 			return;
 		}
