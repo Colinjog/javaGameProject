@@ -35,16 +35,20 @@ public class Game extends Application{
 		
 		Stack<KeyCode> keyStack = new Stack<KeyCode>();
 		
-		Character player = new Character("/character.png",true,"Player1");
+		Character player = new Character("character.png",true,"Player1");
 
-		AIController bot = new AIController(new Character("/character.png", false, "Bot1"));
+		
+		//
+		Character bot1 = new Character("character.png", false, "Bot1");
+		bot1.setHealth(1);
+		AIController bot = new AIController(bot1);
 		bot.getBody().setX(200);
 		bot.getBody().setY(200);
 
-		new Brick(10,10,true,"/brick.png");
-		new Brick(12,10,true,"/brick.png");
-		new Brick(13,10,true,"/brick.png");
-		new Brick(13,11,true,"/brick.png");
+		new Brick(10,10,true,"brick.png");
+		new Brick(12,10,true,"brick.png");
+		new Brick(13,10,true,"brick.png");
+		new Brick(13,11,true,"brick.png");
 		
 		pane.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override

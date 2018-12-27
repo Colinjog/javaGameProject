@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.scene.layout.Pane;
+
 public class Character extends GameObject implements Movable{
 	
 	public static List<Character> characters=new ArrayList<Character>();
@@ -162,5 +164,22 @@ public class Character extends GameObject implements Movable{
 	public void destroy() {
 		 
 	}
-
+	//判断游戏是否结束
+	//游戏结束,返回1并产生画面
+	public static boolean judgeGameOver() {
+		if (characters.isEmpty()) {
+			Pane tmpPane = Character.getPane();
+			GameOver tmp = new GameOver("没有人","gameOver.jpg",tmpPane);
+			return true;
+		}
+		else if (characters.size()==1) {
+			Character tmpCharacter = characters.get(0);
+			Pane tmpPane = Character.getPane();
+			GameOver tmp = new GameOver(tmpCharacter.getName(),"gameOver.jpg",tmpPane);
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 }

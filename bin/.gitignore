@@ -1,7 +1,10 @@
-<<<<<<< HEAD
 /AIController.class
-/Game$1.class
 /character.png
-=======
+/AIController$AIState.class
 /Game$1.class
->>>>>>> tmp
+/bomb.png
+/brick.png
+/eatable.png
+/firework.png
+/GameOver.class
+/gameOver.jpg
