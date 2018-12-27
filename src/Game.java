@@ -111,7 +111,9 @@ public class Game extends Application{
 				for(int j=0;j<GameObject.getMapSize();j++) {
 					o=GameObject.allObjects[i][j];
 					if(o!=null)
+					{
 						o.act();
+					}
 				}
 			}
 		};

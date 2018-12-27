@@ -155,6 +155,7 @@ public class Character extends GameObject implements Movable{
 
 	@Override
 	public void act() {
+		
 		for(int i=0;i<speed;i++) {
 			move();
 		}

@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.scene.layout.Pane;
 
 public class Bomb extends GameObject{
@@ -26,18 +29,57 @@ public class Bomb extends GameObject{
 	public void explode() {
 		Brick tmpBrick;
 		Bomb tmpBomb;
-
-		
-		destroy();//先在矩阵以及Pane中删除该对象，否则之后创建的新对象会替换掉矩阵中的该对象，图片就留在Pane上去不掉了。。。
-
-		
-
-		new FireWork(getXInMatrix(),getYInMatrix(),_imagePath);//在炸弹位置创建火焰
-
+		boolean isExist = false;//炸弹的位置是否有人
+		//判断人跟炸弹同一个位置
+		for (Character tmpCharacter: Character.characters) {
+			int x = tmpCharacter.getXInMatrix();
+			int y = tmpCharacter.getYInMatrix();
+			if (x==this.getXInMatrix() && y==this.getYInMatrix()) {
+				isExist = true;
+				int health = tmpCharacter.getHealth();
+				System.out.println(health);
+				if (tmpCharacter.isPlayer()) {
+					if (health>1) {
+						health--;
+						tmpCharacter.setHealth(health);
+						//玩家被炸弹击中,但玩家还有生命
+						new FireWork(getXInMatrix(),getYInMatrix(),_imagePath);
+						
+					}
+					else {
+						tmpCharacter.destroy();
+						tmpCharacter.setHealth(0);
+						new FireWork(getXInMatrix(),getYInMatrix(),_imagePath);
+						Pane tmpPane = Bomb.getPane();
+						Character.characters.remove(tmpCharacter);//从characters中删除死亡的character
+						tmpCharacter = null;//删除character
+					}
+				}
+				else {
+					if (health>1) {
+						health--;
+						tmpCharacter.setHealth(health);
+						new FireWork(getXInMatrix(),getYInMatrix(),_imagePath);
+						//电脑玩家被炸弹击中,但电脑玩家还有生命
+					}
+					else {
+						tmpCharacter.setHealth(0);
+						tmpCharacter.destroy();
+						Character.characters.remove(tmpCharacter);//从characters中删除死亡的character
+						new FireWork(getXInMatrix(),getYInMatrix(),_imagePath);
+						tmpCharacter = null;//删除character
+					}
+				}
+			}
+		}
+		destroy();//先在矩阵以及Pane中删除该对象，否则之后创建的新对象会替换掉矩阵中的该对象，图片就留在Pane上去不掉了。。
+		if (!isExist) {
+			new FireWork(getXInMatrix(),getYInMatrix(),_imagePath);//在炸弹位置创建火焰
+		}
 		
 		//分别从四个方向判断爆炸逻辑
 		//右方
-		for(int i=1;i<=power&&getXInMatrix()+i<getMapSize();i++) {
+		for(int i=1;i<=power&&getXInMatrix()+i<getMapSize();i++) {//i=0因为需要判断是否炸弹跟character同位置
 			GameObject o=allObjects[getXInMatrix()+i][getYInMatrix()];
 
 			if(o==null)//如果该位置没有
