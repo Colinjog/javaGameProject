@@ -116,6 +116,7 @@ public class Game extends Application{
 					}
 				}
 			}
+			Character.judgeGameOver();
 		};
 		
 		Timeline animation=new Timeline(new KeyFrame(Duration.millis(20),eventHandler));

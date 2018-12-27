@@ -2,7 +2,12 @@ import java.util.Random;
 
 public class AIController{
 
-	private static int minValue = -10000;
+	private final int bombScore = -10000,
+					fireworkScore = -10000,
+					brickScore = 500,
+					eatScore = 5000;
+
+
 	private static int numOfBodies = 0;
 	private static int mapSize;
 
@@ -30,21 +35,29 @@ public class AIController{
 	}
 
 	private void deleteBody(int index){
-		bodies[index] = bodies[numOfBodies-1];
+		bodies[index] = null;
+		bodies[index] = bodies[--numOfBodies];
 		bodies[numOfBodies] = null;
-		--numOfBodies;
 	}
 
 	private void getValueMap(int now){
 		int[][] tempValueMap = new int[mapSize][mapSize];
 		for (int i=0;i<mapSize;++i){
 			for (int j=0;j<mapSize;++j){
-				if (GameObject.allObjects[i][j].getType() == GameObject.Type.BOMB){
+				if (GameObject.allObjects[i][j] == null){ //empty block
+					continue;
+				}
+				GameObject.Type blockType = GameObject.allObjects[i][j].getType();
+				if (blockType == GameObject.Type.BOMB){
+					tempValueMap[i][j] += bombScore;
+					int bombPower = ((Bomb)(GameObject.allObjects[i][j])).getPower();
 					;
-				}else if (GameObject.allObjects[i][j].getType() == GameObject.Type.BRICK){
+				}else if (blockType == GameObject.Type.FIREWORK){
+					tempValueMap[i][j] += fireworkScore;
+				}else if (blockType == GameObject.Type.BRICK){
 					;
-				}else if (GameObject.allObjects[i][j].getType() == GameObject.Type.EATABLE){
-					;
+				}else if (blockType == GameObject.Type.EATABLE){
+					tempValueMap[i][j] += eatScore;
 				}
 			}
 		}
@@ -57,7 +70,7 @@ public class AIController{
 
 	private void makeAction(int index){
 		int x = bodies[index].getXInMatrix(), y = bodies[index].getYInMatrix();
-		if (valueMap[x][y]%100){ //set bomb
+		if (valueMap[x][y]%100 != 0){ //set bomb
 			bodies[index].setBomb();
 		}else{
 			bodies[index].setDir(dirMap[x][y]);
@@ -67,7 +80,7 @@ public class AIController{
 
 	public void act(){ //make decisions here
 		for (int i=0;i<numOfBodies;++i){
-			if (bodies[i].getHealth() > 0){ //still alive
+			if (bodies[i] != null && bodies[i].getHealth() > 0){ //still alive
 				/*getValueMap(i);
 				getDirMap(i);
 				makeAction(i);*/

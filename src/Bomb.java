@@ -396,7 +396,6 @@ public class Bomb extends GameObject{
 				}
 			}
 		}
-		Character.judgeGameOver();
 	}
 
 	@Override
