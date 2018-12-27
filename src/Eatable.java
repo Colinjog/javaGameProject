@@ -42,9 +42,6 @@ public class Eatable extends GameObject{
 	
 	@Override
 	public void act() {
-		
-		if(allObjects[getXInMatrix()][getYInMatrix()]==null||allObjects[getXInMatrix()][getYInMatrix()].getType()!=Type.EATABLE)
-			destroy();
 		// TODO Auto-generated method stub
 		for(Character c:Character.characters) {
 			if(intersect(c)) {
@@ -76,8 +73,6 @@ public class Eatable extends GameObject{
 		GameObject.getPane().getChildren().remove(getCollisionBody());
 		GameObject.getPane().getChildren().remove(getImageView());
 		GameObject.allObjects[getXInMatrix()][getYInMatrix()]=null;
-		
-		objectsList.remove(this);
 	}
 
 }
