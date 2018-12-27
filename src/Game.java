@@ -40,7 +40,7 @@ public class Game extends Application{
 		
 		//
 		Character bot1 = new Character("character.png", false, "Bot1");
-		bot1.setHealth(1);
+		bot1.setHealth(2);
 		bot1.setX(200);
 		bot1.setY(200);
 		AIController bot = new AIController(bot1);
@@ -103,7 +103,9 @@ public class Game extends Application{
 		});
 		
 		EventHandler<ActionEvent> eventHandler = e->{ //called every frame
-			player.act();
+			if (player != null && player.getHealth() != 0){
+				player.act();
+			}
 			bot.act();
 			
 			GameObject o;

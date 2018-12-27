@@ -37,7 +37,6 @@ public class Bomb extends GameObject{
 			if (x==this.getXInMatrix() && y==this.getYInMatrix()) {
 				isExist = true;
 				int health = tmpCharacter.getHealth();
-				System.out.println(health);
 				if (tmpCharacter.isPlayer()) {
 					if (health>1) {
 						health--;
@@ -93,7 +92,6 @@ public class Bomb extends GameObject{
 					if ((x==(i+this.getXInMatrix()))&&(y==this.getYInMatrix())) {
 						temp = true;
 						int health = tmpCharacter1.getHealth();
-						System.out.println(health);
 						if (tmpCharacter1.isPlayer()) {
 							if (health>1) {
 								health--;
@@ -172,7 +170,6 @@ public class Bomb extends GameObject{
 					if ((x==(this.getXInMatrix()-i))&&(y==this.getYInMatrix())) {
 						temp = true;
 						int health = tmpCharacter1.getHealth();
-						System.out.println(health);
 						if (tmpCharacter1.isPlayer()) {
 							if (health>1) {
 								health--;
@@ -256,7 +253,6 @@ public class Bomb extends GameObject{
 					if ((x==this.getXInMatrix())&&(y==(this.getYInMatrix()+i))) {
 						temp = true;
 						int health = tmpCharacter1.getHealth();
-						System.out.println(health);
 						if (tmpCharacter1.isPlayer()) {
 							if (health>1) {
 								health--;
@@ -334,7 +330,6 @@ public class Bomb extends GameObject{
 					if ((x==this.getXInMatrix())&&(y==(this.getYInMatrix()-i))) {
 						temp = true;
 						int health = tmpCharacter1.getHealth();
-						System.out.println(health);
 						if (tmpCharacter1.isPlayer()) {
 							if (health>1) {
 								health--;

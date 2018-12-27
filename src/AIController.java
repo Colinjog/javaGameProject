@@ -4,8 +4,8 @@ public class AIController{
 
 	private final int bombScore = -10000,
 					fireworkScore = -10000,
-					brickScore = 500,
-					eatScore = 5000;
+					brickScore = 1000,
+					eatScore = 2000;
 
 
 	private static int numOfBodies = 0;
@@ -40,6 +40,18 @@ public class AIController{
 		bodies[numOfBodies] = null;
 	}
 
+	private void updateInEveryDir(int[][] map,int x,int y,int step,int delta){
+		int[] dx = {0,0,1,-1}, dy = {1,-1,0,0};
+		for (int k=1;k<=step;++k){
+			for (int i=0;i<4;++i){
+				int nowx = x+dx[i]*k, nowy = y+dx[i]*k;
+				if (nowx < mapSize && nowx >= 0 && nowy < mapSize && nowy >= 0){
+					map[nowx][nowy] += delta;
+				}
+			}
+		}
+	}
+
 	private void getValueMap(int now){
 		int[][] tempValueMap = new int[mapSize][mapSize];
 		for (int i=0;i<mapSize;++i){
@@ -51,11 +63,11 @@ public class AIController{
 				if (blockType == GameObject.Type.BOMB){
 					tempValueMap[i][j] += bombScore;
 					int bombPower = ((Bomb)(GameObject.allObjects[i][j])).getPower();
-					;
+					updateInEveryDir(tempValueMap, i, j, bombPower, bombScore/2);
 				}else if (blockType == GameObject.Type.FIREWORK){
 					tempValueMap[i][j] += fireworkScore;
 				}else if (blockType == GameObject.Type.BRICK){
-					;
+					tempValueMap[i][j] += brickScore;
 				}else if (blockType == GameObject.Type.EATABLE){
 					tempValueMap[i][j] += eatScore;
 				}
@@ -73,7 +85,11 @@ public class AIController{
 		if (valueMap[x][y]%100 != 0){ //set bomb
 			bodies[index].setBomb();
 		}else{
-			bodies[index].setDir(dirMap[x][y]);
+			if (dirMap[x][y] == null){
+				bodies[index].setDir(Movable.Dir.stop);
+			}else{
+				bodies[index].setDir(dirMap[x][y]);
+			}
 			bodies[index].act();
 		}
 	}
@@ -81,9 +97,9 @@ public class AIController{
 	public void act(){ //make decisions here
 		for (int i=0;i<numOfBodies;++i){
 			if (bodies[i] != null && bodies[i].getHealth() > 0){ //still alive
-				/*getValueMap(i);
+				getValueMap(i);
 				getDirMap(i);
-				makeAction(i);*/
+				makeAction(i);
 			}else{
 				deleteBody(i);
 				--i;
