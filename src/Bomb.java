@@ -17,6 +17,10 @@ public class Bomb extends GameObject{
 		setIsCollider(true);
 		setType(Type.BOMB);
 	}
+
+	public int getPower(){
+		return this.power;
+	}
 	
 	public void explode() {
 		Brick tmpBrick;
