@@ -6,6 +6,14 @@ import javafx.scene.layout.Pane;
 public class Character extends GameObject implements Movable{
 	
 	public static List<Character> characters=new ArrayList<Character>();
+	
+	public static void clear() {
+		for(Character c:characters) {
+			c.destroy();
+		}
+	}
+	
+	
 	private boolean isPlayer = true;//是玩家还是机器人
 	private String name = "";//人物的名字,或机器人的名字
 	private Dir dir=Dir.stop; //移动方向
@@ -35,7 +43,18 @@ public class Character extends GameObject implements Movable{
 		allObjects[getXInMatrix()][getYInMatrix()]=null;//人物不处于矩阵中（因为人物可以和炸弹还有火花重合，放在矩阵中不行。。。如果再复杂点这样处理绝对有问题）
 		characters.add(this);
 	}
+	
+	public Character(double x,double y,String imagePath,boolean _isPlayer, String name){
+		super(x,y,imagePath);
+		setPlayer(_isPlayer);
+		this.name = name;
+		setIsCollider(false);
 
+		setType(Type.CHARACTER);
+		allObjects[getXInMatrix()][getYInMatrix()]=null;//人物不处于矩阵中（因为人物可以和炸弹还有火花重合，放在矩阵中不行。。。如果再复杂点这样处理绝对有问题）
+		characters.add(this);
+	}
+	
 	public boolean isPlayer() {
 		return isPlayer;
 	}
@@ -56,7 +75,7 @@ public class Character extends GameObject implements Movable{
 	
 	public int getBombPower() {return bombPower;}
 	
-	public void setSpeed(int _speed) {speed=_speed;}
+	public void setSpeed(int _speed) {if(speed<=10) speed=_speed;}
 	
 	public int getSpeed() {return speed;}
 	
@@ -66,6 +85,7 @@ public class Character extends GameObject implements Movable{
 	
 	@Override
 	public void move() {
+		
 		// TODO Auto-generated method stub
 		List<GameObject> colliders=getColliders();
 		Dir preDir=dir;//人物之前所处的方向（因为人物在墙体边缘滑动时需要变换方向）
@@ -74,7 +94,6 @@ public class Character extends GameObject implements Movable{
 		double y=getY();
 		int size=getSize();
 		
-
 		if((x<=0&&dir==Dir.left)||(x>=(mapSize-1)*size&&dir==Dir.right)||(y<=0&&dir==Dir.up)||(y>=(mapSize-1)*size&&dir==Dir.down)) {
 			return;
 		}
@@ -155,7 +174,6 @@ public class Character extends GameObject implements Movable{
 
 	@Override
 	public void act() {
-		
 		for(int i=0;i<speed;i++) {
 			move();
 		}
@@ -163,7 +181,8 @@ public class Character extends GameObject implements Movable{
 
 	@Override
 	public void destroy() {
-		 
+		 characters.remove(this);
+		 objectsList.remove(this);
 	}
 	//判断游戏是否结束
 	//游戏结束,返回1并产生画面

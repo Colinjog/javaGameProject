@@ -18,7 +18,8 @@ public class Brick extends GameObject{
 	@Override
 	public void act() {
 		// TODO Auto-generated method stub
-		
+		if(allObjects[getXInMatrix()][getYInMatrix()]==null||allObjects[getXInMatrix()][getYInMatrix()].getType()!=Type.BRICK)
+			destroy();
 	}
 
 	@Override
@@ -33,6 +34,7 @@ public class Brick extends GameObject{
 		//int isSet=rand.nextInt()%4;
 		//if(isSet==0)
 			new Eatable(getXInMatrix(),getYInMatrix(),"eatable.png");
-
+		
+		objectsList.remove(this);
 	}
 }
