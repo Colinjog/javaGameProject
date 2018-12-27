@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import javafx.scene.image.*;
 import javafx.scene.layout.Pane;
@@ -9,8 +10,8 @@ import javafx.scene.shape.Rectangle;
 public abstract class GameObject {
 	enum Type{CHARACTER,BRICK,BOMB,FIREWORK,EATABLE}//物体的类型标签
 	
-	private static final int size=50;//每个物体的默认大小
-	private static Pane pane;//绘制窗口
+	protected static final int size=50;//每个物体的默认大小
+	protected static Pane pane;//绘制窗口
 	
 	public static Pane getPane() {return pane;}
 	
@@ -18,15 +19,29 @@ public abstract class GameObject {
 	
 	public static int getSize() {return size;}
 	
-	private Rectangle collisionBody=new Rectangle(0,0,size,size);//碰撞体为正方形
+	protected Rectangle collisionBody=new Rectangle(0,0,size,size);//碰撞体为正方形
 	private Type type;//物体种类
 	private boolean isCollider=true;//是否为碰撞体的标签
 	private long timer=new Date().getTime();//代码执行时间计时器
-	private Image image;//贴图
-	private ImageView imageView;
+	protected Image image;//贴图
+	protected ImageView imageView;
+	
+	private boolean isDestroyed=false;
 	
 	public static int mapSize=20;//地图矩阵的大小
 	public static GameObject[][] allObjects=new GameObject[mapSize][mapSize];//地图矩阵
+	
+	public static List<GameObject> objectsList=new CopyOnWriteArrayList<GameObject>();
+	
+	public static void clear() {
+		objectsList.clear();
+		for(int i=0;i<mapSize;i++) {
+			for(int j=0;j<mapSize;j++) {
+				if(allObjects[i][j]!=null)
+					allObjects[i][j].destroy();
+			}
+		}
+	}
 	
 	public static int getMapSize() {return mapSize;}
 	
@@ -35,11 +50,16 @@ public abstract class GameObject {
 		allObjects=new GameObject[mapSize][mapSize];
 	}
 	
+	public GameObject() {
+		objectsList.add(this);
+	}
+	
 	public GameObject(String imagePath) {
 		imageView = new ImageView(image = new Image(imagePath, size, size, false, false));
 		allObjects[getXInMatrix()][getYInMatrix()]=this;
 		pane.getChildren().add(collisionBody);
 		pane.getChildren().add(imageView);
+		objectsList.add(this);
 	}
 	
 	public GameObject(double _x,double _y,String imagePath) {
@@ -51,7 +71,13 @@ public abstract class GameObject {
 		allObjects[getXInMatrix()][getYInMatrix()]=this;
 		pane.getChildren().add(collisionBody);
 		pane.getChildren().add(imageView);
+		
+		objectsList.add(this);
 	}
+	
+	public boolean isDestroyed() {return isDestroyed;}
+	
+	public void setDestroyed() {isDestroyed=true;}
 	
 	public void setIsCollider(boolean _isCollider) {isCollider=_isCollider;}
 	
@@ -109,3 +135,4 @@ public abstract class GameObject {
 	//物体被摧毁时执行的逻辑
 	public abstract void destroy();
 }
+

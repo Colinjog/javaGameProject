@@ -1,11 +1,19 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import javafx.scene.layout.Pane;
 
 public class Character extends GameObject implements Movable{
 	
-	public static List<Character> characters=new ArrayList<Character>();
+	public static List<Character> characters=new CopyOnWriteArrayList<Character>();
+	
+	public static void clear() {
+		for(Character c:characters) {
+			c.destroy();
+		}
+	}
+	
 	private boolean isPlayer = true;//是玩家还是机器人
 	private String name = "";//人物的名字,或机器人的名字
 	private Dir dir=Dir.stop; //移动方向
@@ -56,7 +64,7 @@ public class Character extends GameObject implements Movable{
 	
 	public int getBombPower() {return bombPower;}
 	
-	public void setSpeed(int _speed) {speed=_speed;}
+	public void setSpeed(int _speed) {if(speed<=10) speed=_speed;}
 	
 	public int getSpeed() {return speed;}
 	
@@ -163,7 +171,9 @@ public class Character extends GameObject implements Movable{
 
 	@Override
 	public void destroy() {
+		 characters.remove(this);
 		 
+		 objectsList.remove(this);
 	}
 	//判断游戏是否结束
 	//游戏结束,返回1并产生画面

@@ -35,20 +35,17 @@ public class Game extends Application{
 		
 		Stack<KeyCode> keyStack = new Stack<KeyCode>();
 		
+		MapGenerator mapGenerator=MapGenerator.getMapGenerator();
+		mapGenerator.initMap("map1", pane);
+		
 		Character player = new Character("character.png",true,"Player1");
 
-		
 		//
 		Character bot1 = new Character("character.png", false, "Bot1");
 		bot1.setHealth(2);
 		bot1.setX(200);
 		bot1.setY(200);
 		AIController bot = new AIController(bot1);
-
-		new Brick(10,10,true,"brick.png");
-		new Brick(12,10,true,"brick.png");
-		new Brick(13,10,true,"brick.png");
-		new Brick(13,11,true,"brick.png");
 		
 		pane.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
@@ -106,18 +103,13 @@ public class Game extends Application{
 			if (player != null && player.getHealth() != 0){
 				player.act();
 			}
-			bot.act();
 			
-			GameObject o;
-			for(int i=0;i<GameObject.getMapSize();i++) {
-				for(int j=0;j<GameObject.getMapSize();j++) {
-					o=GameObject.allObjects[i][j];
-					if(o!=null)
-					{
-						o.act();
-					}
+			for(GameObject o:GameObject.objectsList) {
+				if(o!=player) {
+					o.act();
 				}
 			}
+			
 			Character.judgeGameOver();
 		};
 		

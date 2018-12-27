@@ -6,7 +6,7 @@ import javafx.scene.layout.Pane;
 public class Bomb extends GameObject{
 	
 
-	private int bombTime;//爆炸事件
+	private int bombTime;//爆炸时间
 	private int power;//炸弹威力
 	private Character setter;//放置炸弹的人物
 
@@ -135,12 +135,13 @@ public class Bomb extends GameObject{
 				if(o.getType()==Type.BRICK) {//如果是砖块，则停止判断
 					tmpBrick=(Brick)o;
 					if(tmpBrick.getIsDestroyable()) {
-						tmpBrick.destroy();
+						tmpBrick.setDestroyed();
 					}
 					break;
 				}
 				else if(o.getType()==Type.BOMB) {//如果是炸弹，则引爆
 					tmpBomb=(Bomb)o;
+					//tmpBomb.bombTime=0;
 					tmpBomb.explode();
 				}
 				else if(o.getType()==Type.FIREWORK) {//如果该位置上是火焰，先删除火焰（防止图片遗留），再创建新的火焰
@@ -149,7 +150,7 @@ public class Bomb extends GameObject{
 				}
 				else if(o.getType()==Type.EATABLE) {//如果是道具，摧毁
 					o.destroy();
-					new FireWork(getXInMatrix(),getYInMatrix()+i,_imagePath);
+					new FireWork(getXInMatrix()+1,getYInMatrix(),_imagePath);
 				}
 				else {
 					
@@ -211,13 +212,14 @@ public class Bomb extends GameObject{
 			else if(o.getType()==Type.BRICK) {
 					tmpBrick=(Brick)o;
 					if(tmpBrick.getIsDestroyable()) {
-						tmpBrick.destroy();
+						tmpBrick.setDestroyed();
 					}
 					break;
 
 				}
 				else if(o.getType()==Type.BOMB) {
 					tmpBomb=(Bomb)o;
+					//tmpBomb.bombTime=0;
 					tmpBomb.explode();
 				}
 				else if(o.getType()==Type.FIREWORK) {
@@ -295,12 +297,13 @@ public class Bomb extends GameObject{
 				if(o.getType()==Type.BRICK) {
 					tmpBrick=(Brick)o;
 					if(tmpBrick.getIsDestroyable())
-						tmpBrick.destroy();
+						tmpBrick.setDestroyed();
 					break;
 
 				}
 				else if(o.getType()==Type.BOMB) {
 					tmpBomb=(Bomb)o;
+					//tmpBomb.bombTime=0;
 					tmpBomb.explode();
 				}
 				else if(o.getType()==Type.FIREWORK) {
@@ -371,11 +374,12 @@ public class Bomb extends GameObject{
 				if(o.getType()==Type.BRICK) {
 					tmpBrick=(Brick)o;
 					if(tmpBrick.getIsDestroyable()) 
-						tmpBrick.destroy();
+						tmpBrick.setDestroyed();
 					break;
 				}
 				else if(o.getType()==Type.BOMB) {
 					tmpBomb=(Bomb)o;
+					//tmpBomb.bombTime=0;
 					tmpBomb.explode();
 				}
 				else if(o.getType()==Type.FIREWORK) {
@@ -395,6 +399,7 @@ public class Bomb extends GameObject{
 
 	@Override
 	public void act() {
+
 		bombTime-=getDeltaTime();
 		if(bombTime<=0)
 			explode();
@@ -406,6 +411,8 @@ public class Bomb extends GameObject{
 		GameObject.getPane().getChildren().remove(getImageView());
 		GameObject.allObjects[getXInMatrix()][getYInMatrix()]=null;
 		setter.setBombNum(setter.getBombNum()+1);//炸弹被摧毁时，放置者拥有的炸弹数量+1
+		
+		objectsList.remove(this);
 	}
 	
 }
