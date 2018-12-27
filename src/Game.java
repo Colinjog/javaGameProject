@@ -41,9 +41,9 @@ public class Game extends Application{
 		//
 		Character bot1 = new Character("character.png", false, "Bot1");
 		bot1.setHealth(1);
+		bot1.setX(200);
+		bot1.setY(200);
 		AIController bot = new AIController(bot1);
-		bot.getBody().setX(200);
-		bot.getBody().setY(200);
 
 		new Brick(10,10,true,"brick.png");
 		new Brick(12,10,true,"brick.png");
