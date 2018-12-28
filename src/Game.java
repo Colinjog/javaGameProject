@@ -34,11 +34,15 @@ public class Game extends Application{
 	
 	public static int status = 2;//0游戏结束
 							//1游戏进行中
-							//2游戏未开始
+			 				//2游戏未开始
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
 		Pane pane=new Pane();
+		Rectangle background=new Rectangle(0,0,1000,1000);
+		background.setFill(Color.GREEN);
+		pane.getChildren().add(background);
+		
 		Game.status = 1;
 		GameObject.setPane(pane);
 		

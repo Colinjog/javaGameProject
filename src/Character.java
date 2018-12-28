@@ -22,6 +22,14 @@ public class Character extends GameObject implements Movable{
 	private int maxBombNum=1;
 	private int bombNum=1;//所持炸弹数量
 	private int bombPower=1;//炸弹威力
+	
+	private int protectedTime=0;//被炸弹炸到时进入保护时间
+	private boolean isProtected=false;
+	private int counter=3;//保护状态闪烁的计数器
+	
+	public boolean isProtected() {return isProtected;}
+	
+	public void setProtected(){isProtected=true; protectedTime=1500;}
 
 	{
 		setIsCollider(false);//人物不为碰撞体
@@ -170,6 +178,21 @@ public class Character extends GameObject implements Movable{
 
 	@Override
 	public void act() {
+		long deltaTime=getDeltaTime();
+		if(isProtected) {
+			protectedTime-=deltaTime;
+			if(--counter==0) {
+				counter=3;
+				if(imageView.isVisible())
+					imageView.setVisible(false);
+				else
+					imageView.setVisible(true);
+			}
+			if(protectedTime<=0) {
+				this.imageView.setVisible(true);
+				isProtected=false;
+			}
+		}
 		
 		for(int i=0;i<speed;i++) {
 			move();
