@@ -26,6 +26,10 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 public class Game extends Application{
+	Character player;
+
+
+
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
@@ -38,18 +42,21 @@ public class Game extends Application{
 		MapGenerator mapGenerator=MapGenerator.getMapGenerator();
 		mapGenerator.initMap("map1", pane);
 		
-		Character player = new Character("character.png",true,"Player1");
+		player = new Character("character.png",true,"Player1");
 
 		//
 		Character bot1 = new Character("character.png", false, "Bot1");
-		bot1.setHealth(2);
-		bot1.setX(200);
-		bot1.setY(200);
+		bot1.setHealth(100000);
+		bot1.setX(100);
+		bot1.setY(400);
 		AIController bot = new AIController(bot1);
 		
 		pane.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent event) {
+				if (player == null || player.getHealth() <= 0){
+					return;
+				}
 				// TODO Auto-generated method stub
 				if(!keyStack.contains(event.getCode()))
 					keyStack.push(event.getCode());
@@ -103,6 +110,7 @@ public class Game extends Application{
 			if (player != null && player.getHealth() != 0){
 				player.act();
 			}
+			bot.act();
 			
 			for(GameObject o:GameObject.objectsList) {
 				if(o!=player) {
