@@ -51,10 +51,13 @@ public abstract class GameObject {
 	}
 	
 	public GameObject() {
+		collisionBody.setVisible(false);
+		
 		objectsList.add(this);
 	}
 	
 	public GameObject(String imagePath) {
+		collisionBody.setVisible(false);
 		imageView = new ImageView(image = new Image(imagePath, size, size, false, false));
 		allObjects[getXInMatrix()][getYInMatrix()]=this;
 		pane.getChildren().add(collisionBody);
@@ -63,6 +66,7 @@ public abstract class GameObject {
 	}
 	
 	public GameObject(double _x,double _y,String imagePath) {
+		collisionBody.setVisible(false);
 		imageView = new ImageView(image = new Image(imagePath, size, size, false, false));
 		imageView.setTranslateX(_x);
 		imageView.setTranslateY(_y);
