@@ -14,6 +14,10 @@ public class MapGenerator {
 		return mapGenerator;
 	}
 	
+	public void generateMap() {
+		
+	}
+	
 	public void initMap(String fileName, Pane pane) {
 		GameObject.clear();
 		Character.clear();
@@ -32,7 +36,7 @@ public class MapGenerator {
 					if(type==0)
 						continue;
 					else if(type==1)
-						new Brick(j,i,true,"/brick.png");
+						new Brick(j,i,true,"/DestroyableBrick.png");
 					else
 						new Brick(j,i,false,"/brick.png");
 				}

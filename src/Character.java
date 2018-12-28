@@ -64,7 +64,7 @@ public class Character extends GameObject implements Movable{
 	
 	public int getBombPower() {return bombPower;}
 	
-	public void setSpeed(int _speed) {if(speed<=10) speed=_speed;}
+	public void setSpeed(int _speed) {if(_speed<=10) speed=_speed;}
 	
 	public int getSpeed() {return speed;}
 	
@@ -156,7 +156,7 @@ public class Character extends GameObject implements Movable{
 	
 	public void setBomb() {//·ÅÖÃÕ¨µ¯
 		if(bombNum>0&&allObjects[getXInMatrix()][getYInMatrix()]==null) {
-			new Bomb(getXInMatrix(),getYInMatrix(),bombPower,this,"/bomb.png");
+			new Bomb(getXInMatrix(),getYInMatrix(),bombPower,this,"/Bomb.png");
 			bombNum-=1;
 		}
 	}

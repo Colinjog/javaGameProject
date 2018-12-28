@@ -34,9 +34,9 @@ public class Brick extends GameObject{
 		//砖块被摧毁时，在该位置有三分之一的概率生成随机道具
 		Random rand=new Random();
 
-		//int isSet=rand.nextInt()%4;
-		//if(isSet==0)
-			new Eatable(getXInMatrix(),getYInMatrix(),"eatable.png");
+		int isSet=rand.nextInt()%4;
+		if(isSet==0)
+			new Eatable(getXInMatrix(),getYInMatrix(),"/Eatable.png");
 			
 		objectsList.remove(this);
 	}
