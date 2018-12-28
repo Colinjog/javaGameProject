@@ -112,7 +112,11 @@ public class Game extends Application{
 		pane.getChildren().add(bombInfo);
 		pane.getChildren().add(powerInfo);
 		pane.getChildren().add(speedInfo);
-		
+		info.setFont(Font.font(null,FontWeight.BOLD,20));
+		healthInfo.setFont(Font.font(null,FontWeight.BOLD,20));
+		bombInfo.setFont(Font.font(null,FontWeight.BOLD,20));
+		powerInfo.setFont(Font.font(null,FontWeight.BOLD,20));
+		speedInfo.setFont(Font.font(null,FontWeight.BOLD,20));
 		
 		
 		Button start=new Button();
@@ -123,12 +127,24 @@ public class Game extends Application{
 		pane.getChildren().add(start);
 		
 		start.setOnMouseClicked(e->{
+			pane.getChildren().clear();
+			pane.getChildren().add(background);
 			mapGenerator.generateMap(pane);
+			
+			
+			pane.getChildren().add(info);
+			pane.getChildren().add(healthInfo);
+			pane.getChildren().add(bombInfo);
+			pane.getChildren().add(powerInfo);
+			pane.getChildren().add(speedInfo);
+			pane.getChildren().add(start);
+			
+			
 			player=new Character("player1.png",true,"player1");
 			bot1=new Character("player2.png",false,"player2");
 			bot2=new Character("player3.png",false,"player3");
 			bot3=new Character("player4.png",false,"player4");
-			
+			info.setText(player.getName());
 			player.setX(0);
 			player.setY(0);
 			bot1.setX(950);
