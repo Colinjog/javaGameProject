@@ -172,8 +172,9 @@ public class Character extends GameObject implements Movable{
 	@Override
 	public void destroy() {
 		 characters.remove(this);
-		 
 		 objectsList.remove(this);
+		 GameObject.getPane().getChildren().remove(getCollisionBody());
+		 GameObject.getPane().getChildren().remove(getImageView());
 	}
 	//判断游戏是否结束
 	//游戏结束,返回1并产生画面
@@ -181,12 +182,14 @@ public class Character extends GameObject implements Movable{
 		if (characters.isEmpty()) {
 			Pane tmpPane = Character.getPane();
 			GameOver tmp = new GameOver("没有人","gameOver.jpg",tmpPane);
+			Game.status = 0;
 			return true;
 		}
 		else if (characters.size()==1) {
 			Character tmpCharacter = characters.get(0);
 			Pane tmpPane = Character.getPane();
 			GameOver tmp = new GameOver(tmpCharacter.getName(),"gameOver.jpg",tmpPane);
+			Game.status = 0;
 			return true;
 		}
 		else {

@@ -21,7 +21,6 @@ public class MapGenerator {
 	public void initMap(String fileName, Pane pane) {
 		GameObject.clear();
 		Character.clear();
-		
 		GameObject.setPane(pane);
 		
 		File file=new File(fileName);

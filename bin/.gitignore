@@ -19,5 +19,10 @@
 /eatable.png
 /firework.png
 /gameOver.jpg
+<<<<<<< HEAD
+/Node.class
+/MapGenerator.class
+=======
 /map1
 /Node.class
+>>>>>>> da9235b32dcd5cc27d2d65fc7bd20f131da780de
