@@ -25,6 +25,10 @@ public class Bomb extends GameObject{
 	public int getPower(){
 		return this.power;
 	}
+
+	public Character getSetter(){
+		return this.setter;
+	}
 	
 	public void explode() {
 		Brick tmpBrick;

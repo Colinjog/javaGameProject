@@ -47,14 +47,21 @@ public class Game extends Application{
 		MapGenerator mapGenerator=MapGenerator.getMapGenerator();
 		mapGenerator.initMap("map1", pane);
 		
-		player = new Character("character.png",true,"Player1");
+		Character player = new Character("character.png",true,"Player1");
+		player.setHealth(100);
 
-		//
 		Character bot1 = new Character("character.png", false, "Bot1");
-		bot1.setHealth(100000);
 		bot1.setX(100);
-		bot1.setY(400);
+		bot1.setY(100);
+		//Character bot2 = new Character("character.png", false, "Bot2");
+		//Character bot3 = new Character("character.png", false, "Bot3");
+		//Character bot4 = new Character("character.png", false, "Bot4");
+		//bot2.setX(900);
+		//bot3.setY(900);
 		AIController bot = new AIController(bot1);
+		//bot.addBody(bot2);
+		//bot.addBody(bot3);
+		//bot.addBody(bot4);
 		
 		pane.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
@@ -66,9 +73,6 @@ public class Game extends Application{
 				
 				if(!keyStack.contains(event.getCode()))
 					keyStack.push(event.getCode());
-				if (player==null ||player.getHealth()==0) {
-					return ;
-				}
 				switch(keyStack.lastElement()) {
 				case UP:
 					player.setDir(Movable.Dir.up);
@@ -83,6 +87,10 @@ public class Game extends Application{
 					player.setDir(Movable.Dir.right);
 					break;
 				case SPACE:
+				for (int i=0;i<=1000000000;++i){
+					i+=1;
+					--i;
+				}
 					player.setBomb();
 					break;
 				default:
@@ -93,7 +101,7 @@ public class Game extends Application{
 		
 		pane.setOnKeyReleased(e->{
 			keyStack.removeElement(e.getCode());
-			if (player==null ||player.getHealth()==0) {
+			if (player==null || player.getHealth()==0) {
 				return ;
 			}
 			if(keyStack.isEmpty())
@@ -119,7 +127,9 @@ public class Game extends Application{
 		});
 		
 		EventHandler<ActionEvent> eventHandler = e->{ //called every frame
-			
+			if (Game.status == 0){ //Game Over
+				return;
+			}
 			if (player != null && player.getHealth() != 0 && Game.status==1){
 				player.act();
 			}
