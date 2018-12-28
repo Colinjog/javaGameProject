@@ -15,7 +15,7 @@ public class Bomb extends GameObject{
 	public Bomb(int _xInMatrix,int _yInMatrix,int _power, Character _setter,String imagePath) {
 		super(_xInMatrix*getSize(),_yInMatrix*getSize(),imagePath);
 		_imagePath = "/firework.png";
-		bombTime=2000;
+		bombTime=3000;
 		power=_power;
 		setter=_setter;
 		setIsCollider(true);
