@@ -17,6 +17,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 import java.util.Timer;
+
+import javax.xml.stream.events.Characters;
+
+import com.sun.glass.ui.CommonDialogs.Type;
+
 import javafx.util.*;
 
 import javafx.scene.paint.Color;
@@ -26,11 +31,15 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 public class Game extends Application{
+	
+	public static int status = 2;//0游戏结束
+							//1游戏进行中
+							//2游戏未开始
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
 		Pane pane=new Pane();
-		
+		Game.status = 1;
 		GameObject.setPane(pane);
 		
 		Stack<KeyCode> keyStack = new Stack<KeyCode>();
@@ -51,8 +60,12 @@ public class Game extends Application{
 			@Override
 			public void handle(KeyEvent event) {
 				// TODO Auto-generated method stub
+				
 				if(!keyStack.contains(event.getCode()))
 					keyStack.push(event.getCode());
+				if (player==null ||player.getHealth()==0) {
+					return ;
+				}
 				switch(keyStack.lastElement()) {
 				case UP:
 					player.setDir(Movable.Dir.up);
@@ -77,6 +90,9 @@ public class Game extends Application{
 		
 		pane.setOnKeyReleased(e->{
 			keyStack.removeElement(e.getCode());
+			if (player==null ||player.getHealth()==0) {
+				return ;
+			}
 			if(keyStack.isEmpty())
 				player.setDir(Movable.Dir.stop);
 			else {
@@ -100,12 +116,12 @@ public class Game extends Application{
 		});
 		
 		EventHandler<ActionEvent> eventHandler = e->{ //called every frame
-			if (player != null && player.getHealth() != 0){
+			
+			if (player != null && player.getHealth() != 0 && Game.status==1){
 				player.act();
 			}
-			
 			for(GameObject o:GameObject.objectsList) {
-				if(o!=player) {
+				if (o!=player) {
 					o.act();
 				}
 			}
