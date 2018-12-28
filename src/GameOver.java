@@ -20,7 +20,7 @@ public class GameOver{
 	}
 	public void setImagePath(String imagePath) {
 		this.imagePath = imagePath;
-	}
+	} 
 	public GameOver(String winner,String imagePath,Pane pane) {
 		winnerName = winner;
 		this.imagePath = imagePath;
