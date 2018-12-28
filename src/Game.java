@@ -47,7 +47,7 @@ public class Game extends Application{
 		MapGenerator mapGenerator=MapGenerator.getMapGenerator();
 		mapGenerator.generateMap(pane);
 		
-		Character player = new Character("character.png",true,"Player1");
+		Character player = new Character("/player1.png", true, "Player1");
 		Text info=new Text(1010,50,"name:"+player.getName());
 		Text healthInfo=new Text(1010,100,"health:"+player.getHealth());
 		Text bombInfo=new Text(1010,150,"bomb:"+player.getBombNum()+"/"+player.getMaxBombNum());
@@ -60,29 +60,32 @@ public class Game extends Application{
 		pane.getChildren().add(powerInfo);
 		pane.getChildren().add(speedInfo);
 		
-		//
-		Character bot1 = new Character("character.png", false, "Bot1");
-		bot1.setHealth(100000);
+
+		Character bot1 = new Character("player2.png", false, "Bot1");
 		bot1.setX(0);
 		bot1.setY(950);
+		//Character bot2 = new Character("character.png", false, "Bot2");
+		//Character bot3 = new Character("character.png", false, "Bot3");
+		//Character bot4 = new Character("character.png", false, "Bot4");
+		//bot2.setX(900);
+		//bot3.setY(900);
+
 		AIController bot = new AIController(bot1);
+		//bot.addBody(bot2);
+		//bot.addBody(bot3);
+		//bot.addBody(bot4);
 		
 		pane.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent event) {
-				if (player == null || player.getHealth() <= 0){
-					return;
-				}
 				// TODO Auto-generated method stub
 				
 				if(!keyStack.contains(event.getCode()))
 					keyStack.push(event.getCode());
-				if (player==null ||player.getHealth()==0) {
-					return ;
-				}
 				switch(keyStack.lastElement()) {
 				case UP:
 					player.setDir(Movable.Dir.up);
+					
 					break;
 				case DOWN:
 				    player.setDir(Movable.Dir.down);
@@ -94,6 +97,10 @@ public class Game extends Application{
 					player.setDir(Movable.Dir.right);
 					break;
 				case SPACE:
+				for (int i=0;i<=1000000000;++i){
+					i+=1;
+					--i;
+				}
 					player.setBomb();
 					break;
 				default:
@@ -104,9 +111,10 @@ public class Game extends Application{
 		
 		pane.setOnKeyReleased(e->{
 			keyStack.removeElement(e.getCode());
-			if (player==null ||player.getHealth()==0) {
+			if (player==null || player.getHealth()==0) {
 				return ;
 			}
+			
 			if(keyStack.isEmpty())
 				player.setDir(Movable.Dir.stop);
 			else {
@@ -130,12 +138,13 @@ public class Game extends Application{
 		});
 		
 		EventHandler<ActionEvent> eventHandler = e->{ //called every frame
-			
+			if (Game.status == 0){ //Game Over
+				return;
+			}
+			bot.act();
 			if (player != null && player.getHealth() != 0 && Game.status==1){
 				player.act();
 			}
-			bot.act();
-			
 			for(GameObject o:GameObject.objectsList) {
 				if (o!=player) {
 					o.act();

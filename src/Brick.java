@@ -36,7 +36,7 @@ public class Brick extends GameObject{
 
 		int isSet=rand.nextInt()%4;
 		if(isSet==0)
-			new Eatable(getXInMatrix(),getYInMatrix(),"/Eatable.png");
+			new Eatable(getXInMatrix(),getYInMatrix());
 			
 		objectsList.remove(this);
 	}

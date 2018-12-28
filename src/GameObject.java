@@ -26,6 +26,10 @@ public abstract class GameObject {
 	protected Image image;//贴图
 	protected ImageView imageView;
 	
+	public void setImageView(ImageView imageView) {
+		this.imageView = imageView;
+	}
+
 	private boolean isDestroyed=false;
 	
 	public static int mapSize=20;//地图矩阵的大小
@@ -55,7 +59,7 @@ public abstract class GameObject {
 		
 		objectsList.add(this);
 	}
-	
+
 	public GameObject(String imagePath) {
 		collisionBody.setVisible(false);
 		
@@ -69,15 +73,16 @@ public abstract class GameObject {
 	
 	public GameObject(double _x,double _y,String imagePath) {
 		collisionBody.setVisible(false);
-		
-		imageView = new ImageView(image = new Image(imagePath, size, size, false, false));
-		imageView.setTranslateX(_x);
-		imageView.setTranslateY(_y);
+		if (imagePath != "empty"){
+			imageView = new ImageView(image = new Image(imagePath, size, size, false, false));
+			pane.getChildren().add(imageView);
+			imageView.setTranslateX(_x);
+			imageView.setTranslateY(_y);
+		}
 		collisionBody.setX(_x);
 		collisionBody.setY(_y);
 		allObjects[getXInMatrix()][getYInMatrix()]=this;
 		pane.getChildren().add(collisionBody);
-		pane.getChildren().add(imageView);
 		
 		objectsList.add(this);
 	}
@@ -107,6 +112,13 @@ public abstract class GameObject {
 	public int getYInMatrix() {return ((int)collisionBody.getY()+size/2)/size;}//获取该物体在矩阵中的Y
 	
 	public Rectangle getCollisionBody() {return collisionBody;}
+
+	public void setImage(String path){
+		imageView = new ImageView(new Image(path, size, size, false, false));
+		pane.getChildren().add(imageView);
+		imageView.setTranslateX(this.getX() - size/4);
+		imageView.setTranslateY(this.getY() - size/4);
+	}
 
 	public ImageView getImageView() {return imageView;}
 	

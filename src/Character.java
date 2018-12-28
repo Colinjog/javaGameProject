@@ -161,8 +161,10 @@ public class Character extends GameObject implements Movable{
 	
 	public void setBomb() {//·ÅÖÃÕ¨µ¯
 		if(bombNum>0&&allObjects[getXInMatrix()][getYInMatrix()]==null) {
-			new Bomb(getXInMatrix(),getYInMatrix(),bombPower,this,"/Bomb.png");
+			new Bomb(getXInMatrix(),getYInMatrix(),bombPower,this,"/Bomb.gif");
 			bombNum-=1;
+			pane.getChildren().remove(this.getImageView());
+			pane.getChildren().add(this.getImageView());
 		}
 	}
 
