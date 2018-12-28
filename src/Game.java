@@ -10,6 +10,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.awt.Panel;
@@ -98,6 +100,21 @@ public class Game extends Application{
 		
 		GameObject.setPane(pane);
 		
+		
+		//添加玩家信息
+		info=new Text(1010,50,"name:");
+		healthInfo=new Text(1010,100,"health:");
+		bombInfo=new Text(1010,150,"bomb:");
+		powerInfo=new Text(1010,200,"power:");
+		speedInfo=new Text(1010,250,"speed");
+		pane.getChildren().add(info);
+		pane.getChildren().add(healthInfo);
+		pane.getChildren().add(bombInfo);
+		pane.getChildren().add(powerInfo);
+		pane.getChildren().add(speedInfo);
+		
+		
+		
 		Button start=new Button();
 		start.setLayoutX(1050);
 		start.setLayoutY(500);
@@ -118,18 +135,7 @@ public class Game extends Application{
 			bot1.setY(950);
 			bot2.setX(950);
 			bot3.setY(950);
-			
-			//添加玩家信息
-			info=new Text(1010,50,"name:"+player.getName());
-			healthInfo=new Text(1010,100,"health:"+player.getHealth());
-			bombInfo=new Text(1010,150,"bomb:"+player.getBombNum()+"/"+player.getMaxBombNum());
-			powerInfo=new Text(1010,200,"power:"+player.getBombPower());
-			speedInfo=new Text(1010,250,"speed"+player.getSpeed());
-			pane.getChildren().add(info);
-			pane.getChildren().add(healthInfo);
-			pane.getChildren().add(bombInfo);
-			pane.getChildren().add(powerInfo);
-			pane.getChildren().add(speedInfo);
+
 
 			bot = new AIController(bot1);
 			bot.addBody(bot2);
