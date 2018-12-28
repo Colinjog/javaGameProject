@@ -26,8 +26,16 @@ public abstract class GameObject {
 	protected Image image;//ÌùÍ¼
 	protected ImageView imageView;
 	
-	public void setImageView(ImageView imageView) {
-		this.imageView = imageView;
+	public void setImageView(ImageView newImageView) {
+		if (newImageView==this.imageView) {
+			return ;
+		}
+		newImageView.setTranslateX(this.getX());
+		newImageView.setTranslateY(this.getY());
+		
+		pane.getChildren().remove(this.imageView);
+		this.imageView = newImageView;
+		pane.getChildren().add(this.imageView);
 	}
 
 	private boolean isDestroyed=false;

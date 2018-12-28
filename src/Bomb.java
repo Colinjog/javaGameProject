@@ -153,6 +153,7 @@ public class Bomb extends GameObject{
 					if(tmpBrick.getIsDestroyable()) {
 						tmpBrick.setDestroyed();
 					}
+					new FireWork(getXInMatrix()+i,getYInMatrix(),_imagePath);//×©¿é±¬ºóµÄ»ðÑæ
 					break;
 				}
 				else if(o.getType()==Type.BOMB) {//Èç¹ûÊÇÕ¨µ¯£¬ÔòÒý±¬
@@ -236,6 +237,7 @@ public class Bomb extends GameObject{
 					if(tmpBrick.getIsDestroyable()) {
 						tmpBrick.setDestroyed();
 					}
+					new FireWork(getXInMatrix()-i,getYInMatrix(),_imagePath);//×©¿é±¬ºóµÄ»ðÑæ
 					break;
 
 				}
@@ -326,6 +328,7 @@ public class Bomb extends GameObject{
 					tmpBrick=(Brick)o;
 					if(tmpBrick.getIsDestroyable())
 						tmpBrick.setDestroyed();
+					new FireWork(getXInMatrix(),getYInMatrix()+i,_imagePath);//×©¿é±¬ºóµÄ»ðÑæ
 					break;
 
 				}
@@ -409,6 +412,7 @@ public class Bomb extends GameObject{
 					tmpBrick=(Brick)o;
 					if(tmpBrick.getIsDestroyable()) 
 						tmpBrick.setDestroyed();
+					new FireWork(getXInMatrix(),getYInMatrix()-i,_imagePath);//×©¿é±¬ºóµÄ»ðÑæ
 					break;
 				}
 				else if(o.getType()==Type.BOMB) {
