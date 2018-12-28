@@ -48,8 +48,6 @@ public class Game extends Application{
 		mapGenerator.initMap("map1", pane);
 		
 		Character player = new Character("character.png",true,"Player1");
-		player.setHealth(100);
-
 		Character bot1 = new Character("character.png", false, "Bot1");
 		bot1.setX(100);
 		bot1.setY(100);
@@ -66,9 +64,6 @@ public class Game extends Application{
 		pane.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent event) {
-				if (player == null || player.getHealth() <= 0){
-					return;
-				}
 				// TODO Auto-generated method stub
 				
 				if(!keyStack.contains(event.getCode()))
@@ -76,6 +71,7 @@ public class Game extends Application{
 				switch(keyStack.lastElement()) {
 				case UP:
 					player.setDir(Movable.Dir.up);
+					
 					break;
 				case DOWN:
 				    player.setDir(Movable.Dir.down);
@@ -104,6 +100,7 @@ public class Game extends Application{
 			if (player==null || player.getHealth()==0) {
 				return ;
 			}
+			
 			if(keyStack.isEmpty())
 				player.setDir(Movable.Dir.stop);
 			else {
@@ -130,11 +127,10 @@ public class Game extends Application{
 			if (Game.status == 0){ //Game Over
 				return;
 			}
+			bot.act();
 			if (player != null && player.getHealth() != 0 && Game.status==1){
 				player.act();
 			}
-			bot.act();
-			
 			for(GameObject o:GameObject.objectsList) {
 				if (o!=player) {
 					o.act();
