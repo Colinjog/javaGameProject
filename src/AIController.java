@@ -16,7 +16,7 @@ public class AIController{
 					fireworkScore = -10000,
 					brickScore = 103,
 					eatScore = 2000,
-					killScore = 13;
+					killScore = 103;
 	private final double stepScore = -0.1;
 
 

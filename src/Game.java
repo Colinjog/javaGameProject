@@ -47,8 +47,8 @@ public class Game extends Application{
 		MapGenerator mapGenerator=MapGenerator.getMapGenerator();
 		mapGenerator.initMap("map1", pane);
 		
-		Character player = new Character("character.png",true,"Player1");
-		Character bot1 = new Character("character.png", false, "Bot1");
+		Character player = new Character("player1.png", true, "Player1");
+		Character bot1 = new Character("player2.png", false, "Bot1");
 		bot1.setX(100);
 		bot1.setY(100);
 		//Character bot2 = new Character("character.png", false, "Bot2");
