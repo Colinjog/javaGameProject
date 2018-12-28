@@ -46,12 +46,8 @@ public abstract class GameObject {
 	public static List<GameObject> objectsList=new CopyOnWriteArrayList<GameObject>();
 	
 	public static void clear() {
-		objectsList.clear();
-		for(int i=0;i<mapSize;i++) {
-			for(int j=0;j<mapSize;j++) {
-				if(allObjects[i][j]!=null)
-					allObjects[i][j].destroy();
-			}
+		while(!objectsList.isEmpty()) {
+			objectsList.get(0).destroy();
 		}
 	}
 	
