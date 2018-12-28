@@ -25,8 +25,8 @@ public class GameOver{
 		winnerName = winner;
 		this.imagePath = imagePath;
 		this.pane = pane;
-		imageView = new ImageView(new Image(imagePath,400,200,false,false));
-		imageView.setX(300);//
+		imageView = new ImageView(new Image(imagePath,300,150,false,false));
+		imageView.setX(360);//
 		imageView.setY(100);
 		pane.getChildren().add(imageView);
 		

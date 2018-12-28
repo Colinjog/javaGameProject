@@ -26,7 +26,13 @@ public class Character extends GameObject implements Movable{
 	{
 		setIsCollider(false);//人物不为碰撞体
 	}
-
+	public void init() {
+		this.setBombNum(1);
+		this.setSpeed(5);
+		this.setDir(Dir.stop);
+		this.setBombPower(1);
+		
+	}
 	public String getName() {
 		return name;
 	}
@@ -188,14 +194,20 @@ public class Character extends GameObject implements Movable{
 	public static boolean judgeGameOver() {
 		if (characters.isEmpty()) {
 			Pane tmpPane = Character.getPane();
-			GameOver tmp = new GameOver("没有人","gameOver.jpg",tmpPane);
+			GameOver tmp = new GameOver("没有人","gameOver.png",tmpPane);
 			Game.status = 0;
 			return true;
 		}
 		else if (characters.size()==1) {
 			Character tmpCharacter = characters.get(0);
 			Pane tmpPane = Character.getPane();
-			GameOver tmp = new GameOver(tmpCharacter.getName(),"gameOver.jpg",tmpPane);
+			GameOver tmp = new GameOver(tmpCharacter.getName(),"gameOver.png",tmpPane);
+			Game.status = 0;
+			return true;
+		}
+		else if (Game.player.health<1) {
+			Pane tmpPane = Character.getPane();
+			GameOver tmp = new GameOver(Game.player.getName(),"gameOver.png",tmpPane);
 			Game.status = 0;
 			return true;
 		}

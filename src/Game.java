@@ -41,6 +41,7 @@ public class Game extends Application{
 	public static ImageView player2[] = new ImageView[4];
 	public static ImageView player3[] = new ImageView[4];
 	public static ImageView player4[] = new ImageView[4];
+	public static Character player;
 	private Image image;
 	
 	public void initImage() {
@@ -78,7 +79,7 @@ public class Game extends Application{
 		MapGenerator mapGenerator=MapGenerator.getMapGenerator();
 		mapGenerator.generateMap(pane);
 		
-		Character player = new Character("/player1.png", true, "Player1");
+		player = new Character("/player1.png", true, "Player1");
 		player.setX(0);
 		player.setY(0);
 		Text info=new Text(1010,50,"name:"+player.getName());
