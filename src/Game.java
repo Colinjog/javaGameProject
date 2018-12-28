@@ -52,7 +52,18 @@ public class Game extends Application{
 		player1[1] = new ImageView(image=new Image("left.png",GameObject.size,GameObject.size,false,false));
 		player1[2] = new ImageView(image=new Image("right.png",GameObject.size,GameObject.size,false,false));
 		player1[3] = new ImageView(image=new Image("back.png",GameObject.size,GameObject.size,false,false));
-		
+		player2[0] = new ImageView(image=new Image("player2.png",GameObject.size,GameObject.size,false,false));
+		player2[1] = new ImageView(image=new Image("left2.png",GameObject.size,GameObject.size,false,false));
+		player2[2] = new ImageView(image=new Image("right2.png",GameObject.size,GameObject.size,false,false));
+		player2[3] = new ImageView(image=new Image("back2.png",GameObject.size,GameObject.size,false,false));
+		player3[0] = new ImageView(image=new Image("player3.png",GameObject.size,GameObject.size,false,false));
+		player3[1] = new ImageView(image=new Image("left3.png",GameObject.size,GameObject.size,false,false));
+		player3[2] = new ImageView(image=new Image("right3.png",GameObject.size,GameObject.size,false,false));
+		player3[3] = new ImageView(image=new Image("back3.png",GameObject.size,GameObject.size,false,false));
+		player4[0] = new ImageView(image=new Image("player4.png",GameObject.size,GameObject.size,false,false));
+		player4[1] = new ImageView(image=new Image("left4.png",GameObject.size,GameObject.size,false,false));
+		player4[2] = new ImageView(image=new Image("right4.png",GameObject.size,GameObject.size,false,false));
+		player4[3] = new ImageView(image=new Image("back4.png",GameObject.size,GameObject.size,false,false));
 	}
 	@Override
 	public void start(Stage primaryStage) throws Exception {
