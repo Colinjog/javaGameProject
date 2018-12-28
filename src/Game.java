@@ -64,16 +64,16 @@ public class Game extends Application{
 		Character bot1 = new Character("player2.png", false, "Bot1");
 		bot1.setX(0);
 		bot1.setY(950);
-		//Character bot2 = new Character("character.png", false, "Bot2");
-		//Character bot3 = new Character("character.png", false, "Bot3");
-		//Character bot4 = new Character("character.png", false, "Bot4");
-		//bot2.setX(900);
-		//bot3.setY(900);
+		Character bot2 = new Character("character.png", false, "Bot2");
+		Character bot3 = new Character("character.png", false, "Bot3");
+		Character bot4 = new Character("character.png", false, "Bot4");
+		bot2.setX(900);
+		bot3.setY(900);
 
 		AIController bot = new AIController(bot1);
-		//bot.addBody(bot2);
-		//bot.addBody(bot3);
-		//bot.addBody(bot4);
+		bot.addBody(bot2);
+		bot.addBody(bot3);
+		bot.addBody(bot4);
 		
 		pane.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override

@@ -3,6 +3,10 @@
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 
 public class GameOver{
 
@@ -27,6 +31,10 @@ public class GameOver{
 		pane.getChildren().add(imageView);
 		
 		
+		Text winnerText = new Text(400,300,winnerName+" win");
+		winnerText.setFont(Font.font(null,FontWeight.BOLD,40));
+		winnerText.setFill(Color.INDIANRED);
+		pane.getChildren().add(winnerText);
 		
 	}
 	public Pane getPane() {
