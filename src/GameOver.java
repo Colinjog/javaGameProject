@@ -23,8 +23,10 @@ public class GameOver{
 		this.pane = pane;
 		imageView = new ImageView(new Image(imagePath,400,200,false,false));
 		imageView.setX(300);//
-		imageView.setY(400);
+		imageView.setY(100);
 		pane.getChildren().add(imageView);
+		
+		
 		
 	}
 	public Pane getPane() {
