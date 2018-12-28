@@ -12,7 +12,7 @@ public class GameOver{
 
 	private String imagePath;
 	private String winnerName;
-	private ImageView imageView;
+	public static ImageView imageView;
 	private Pane pane;//»æÖÆ´°¿Ú
 	
 	public String getImagePath() {

@@ -10,6 +10,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.awt.Panel;
@@ -93,7 +95,11 @@ public class Game extends Application{
 		Text bombInfo=new Text(1010,150,"bomb:"+player.getBombNum()+"/"+player.getMaxBombNum());
 		Text powerInfo=new Text(1010,200,"power:"+player.getBombPower());
 		Text speedInfo=new Text(1010,250,"speed"+player.getSpeed());
-		
+		info.setFont(Font.font(null,FontWeight.BOLD,20));
+		bombInfo.setFont(Font.font(null,FontWeight.BOLD,20));
+		healthInfo.setFont(Font.font(null,FontWeight.BOLD,20));
+		powerInfo.setFont(Font.font(null,FontWeight.BOLD,20));
+		speedInfo.setFont(Font.font(null,FontWeight.BOLD,20));
 		pane.getChildren().add(info);
 		pane.getChildren().add(healthInfo);
 		pane.getChildren().add(bombInfo);
