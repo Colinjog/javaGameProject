@@ -32,7 +32,7 @@ public class FireWork extends GameObject{
 	public void destroy() { 
 		GameObject.getPane().getChildren().remove(getCollisionBody());
 		GameObject.getPane().getChildren().remove(getImageView());
-		GameObject.allObjects[getXInMatrix()][getYInMatrix()]=null;
+		
 		
 		objectsList.remove(this);
 	}
