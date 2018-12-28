@@ -125,19 +125,18 @@ public class Game extends Application{
 				switch(keyStack.lastElement()) {
 				case UP:
 					player.setDir(Movable.Dir.up);
-					player.setImageView(Game.player1[3]);
 					break;
 				case DOWN:
 				    player.setDir(Movable.Dir.down);
-				    player.setImageView(Game.player1[0]);
+				    
 					break;
 				case LEFT:
 					player.setDir(Movable.Dir.left);
-					player.setImageView(Game.player1[1]);
+					
 					break;
 				case RIGHT:
 					player.setDir(Movable.Dir.right);
-					player.setImageView(Game.player1[2]);
+					
 					break;
 				case SPACE:
 					player.setBomb();
@@ -181,11 +180,82 @@ public class Game extends Application{
 				return;
 			}
 			bot.act();
+			bot1.act();
+			bot2.act();
+			bot3.act();
+			
+			switch(bot1.getDir()) {
+			case up:
+				bot1.setImageView(Game.player2[3]);
+				break;
+			case down:
+				bot1.setImageView(Game.player2[0]);
+				break;
+			case left:
+				bot1.setImageView(Game.player2[1]);
+				break;
+			case right:
+				bot1.setImageView(Game.player2[2]);
+				break;
+			default:
+				break;
+			}
+			
+			switch(bot2.getDir()) {
+			case up:
+				bot2.setImageView(Game.player3[3]);
+				break;
+			case down:
+				bot2.setImageView(Game.player3[0]);
+				break;
+			case left:
+				bot2.setImageView(Game.player3[1]);
+				break;
+			case right:
+				bot2.setImageView(Game.player3[2]);
+				break;
+			default:
+				break;
+			}
+			
+			switch(bot3.getDir()) {
+			case up:
+				bot3.setImageView(Game.player4[3]);
+				break;
+			case down:
+				bot3.setImageView(Game.player4[0]);
+				break;
+			case left:
+				bot3.setImageView(Game.player4[1]);
+				break;
+			case right:
+				bot3.setImageView(Game.player4[2]);
+				break;
+			default:
+				break;
+			}
+			
 			if (player != null && player.getHealth() != 0 && Game.status==1){
+				switch(player.getDir()) {
+				case up:
+					player.setImageView(Game.player1[3]);
+					break;
+				case down:
+					player.setImageView(Game.player1[0]);
+					break;
+				case left:
+					player.setImageView(Game.player1[1]);
+					break;
+				case right:
+					player.setImageView(Game.player1[2]);
+					break;
+				default:
+					break;
+				}
 				player.act();
 			}
 			for(GameObject o:GameObject.objectsList) {
-				if (o!=player) {
+				if (o.getType()!=GameObject.Type.CHARACTER) {
 					o.act();
 				}
 			}

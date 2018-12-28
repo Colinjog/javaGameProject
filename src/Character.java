@@ -184,7 +184,7 @@ public class Character extends GameObject implements Movable{
 			if(--counter==0) {
 				counter=3;
 				if(imageView.isVisible())
-					imageView.setVisible(false);
+					imageView.setVisible(false); 
 				else
 					imageView.setVisible(true);
 			}
@@ -193,6 +193,10 @@ public class Character extends GameObject implements Movable{
 				isProtected=false;
 			}
 		}
+		else {
+			imageView.setVisible(true);
+		}
+		
 		
 		for(int i=0;i<speed;i++) {
 			move();

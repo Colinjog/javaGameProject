@@ -93,7 +93,7 @@ public abstract class GameObject {
 		pane.getChildren().add(collisionBody);
 		
 		objectsList.add(this);
-	}
+	} 
 	
 	public boolean isDestroyed() {return isDestroyed;}
 	
