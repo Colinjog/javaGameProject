@@ -22,7 +22,7 @@ public class Brick extends GameObject{
 			destroy();
 		
 		if(isDestroyed())
-			destroy();
+			destroy(); 
 	}
 
 	@Override

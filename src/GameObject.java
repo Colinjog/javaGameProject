@@ -58,15 +58,18 @@ public abstract class GameObject {
 	
 	public GameObject(String imagePath) {
 		collisionBody.setVisible(false);
+		
 		imageView = new ImageView(image = new Image(imagePath, size, size, false, false));
 		allObjects[getXInMatrix()][getYInMatrix()]=this;
 		pane.getChildren().add(collisionBody);
 		pane.getChildren().add(imageView);
+		
 		objectsList.add(this);
 	}
 	
 	public GameObject(double _x,double _y,String imagePath) {
 		collisionBody.setVisible(false);
+		
 		imageView = new ImageView(image = new Image(imagePath, size, size, false, false));
 		imageView.setTranslateX(_x);
 		imageView.setTranslateY(_y);

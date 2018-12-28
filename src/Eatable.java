@@ -58,6 +58,7 @@ public class Eatable extends GameObject{
 					break;
 				case BOMB:
 					c.setBombNum(c.getBombNum()+1);
+					c.setMaxBombNum(c.getMaxBombNum()+1);
 					break;
 				case POWER:
 					c.setBombPower(c.getBombPower()+1);

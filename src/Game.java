@@ -45,15 +45,26 @@ public class Game extends Application{
 		Stack<KeyCode> keyStack = new Stack<KeyCode>();
 		
 		MapGenerator mapGenerator=MapGenerator.getMapGenerator();
-		mapGenerator.initMap("map1", pane);
+		mapGenerator.generateMap(pane);
 		
-		player = new Character("character.png",true,"Player1");
-
+		Character player = new Character("character.png",true,"Player1");
+		Text info=new Text(1010,50,"name:"+player.getName());
+		Text healthInfo=new Text(1010,100,"health:"+player.getHealth());
+		Text bombInfo=new Text(1010,150,"bomb:"+player.getBombNum()+"/"+player.getMaxBombNum());
+		Text powerInfo=new Text(1010,200,"power:"+player.getBombPower());
+		Text speedInfo=new Text(1010,250,"speed"+player.getSpeed());
+		
+		pane.getChildren().add(info);
+		pane.getChildren().add(healthInfo);
+		pane.getChildren().add(bombInfo);
+		pane.getChildren().add(powerInfo);
+		pane.getChildren().add(speedInfo);
+		
 		//
 		Character bot1 = new Character("character.png", false, "Bot1");
 		bot1.setHealth(100000);
-		bot1.setX(100);
-		bot1.setY(400);
+		bot1.setX(0);
+		bot1.setY(950);
 		AIController bot = new AIController(bot1);
 		
 		pane.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -131,6 +142,11 @@ public class Game extends Application{
 				}
 			}
 			
+			healthInfo.setText("health:"+player.getHealth());
+			bombInfo.setText("bomb:"+player.getBombNum()+"/"+player.getMaxBombNum());
+			powerInfo.setText("power:"+player.getBombPower());
+			speedInfo.setText("speed"+player.getSpeed());
+			
 			Character.judgeGameOver();
 		};
 		
@@ -139,7 +155,7 @@ public class Game extends Application{
 		animation.setCycleCount(Timeline.INDEFINITE);
 		animation.play();
 		
-		Scene scene=new Scene(pane,1000,1000);
+		Scene scene=new Scene(pane,1300,1000);
 		
 		primaryStage.setTitle("Bomb It");
 		primaryStage.setScene(scene);

@@ -19,6 +19,7 @@ public class Character extends GameObject implements Movable{
 	private Dir dir=Dir.stop; //移动方向
 	private	int speed=5;//移动速度
 	private int health=3;//生命值
+	private int maxBombNum=1;
 	private int bombNum=1;//所持炸弹数量
 	private int bombPower=1;//炸弹威力
 
@@ -55,6 +56,10 @@ public class Character extends GameObject implements Movable{
 	public Dir getDir() {return dir;}
 	
 	public void setDir(Dir _dir) {dir=_dir;}
+	
+	public void setMaxBombNum(int _maxBombNum) {maxBombNum=_maxBombNum;}
+	
+	public int getMaxBombNum() {return maxBombNum;}
 	
 	public void setBombNum(int _bombNum) {bombNum=_bombNum;}
 	
@@ -100,7 +105,7 @@ public class Character extends GameObject implements Movable{
 			int ym=getYInMatrix();
 			
 			//分方向处理人物移动时的碰撞，如果人物处于墙体边缘，可以使人物垂直滑动
-			if((colliderX-x+getSize()==0&&y- colliderY<getSize()&& colliderY-y<getSize()&&dir==Dir.left)) {
+			if((colliderX-x+getSize()<=getSize()/2&&y- colliderY<getSize()&& colliderY-y<getSize()&&dir==Dir.left)) {
 				if(xm!=0&&(allObjects[xm-1][ym]==null||allObjects[xm-1][ym].getType()==Type.EATABLE)) {
 					dir=y>ym*size?Dir.up:Dir.down;
 				}
@@ -108,7 +113,7 @@ public class Character extends GameObject implements Movable{
 					return;
 			}
 			
-			if(colliderX-x-getSize()==0&&y- colliderY<getSize()&& colliderY-y<getSize()&&dir==Dir.right) {
+			if(x+getSize()-colliderX<=getSize()/2&&y- colliderY<getSize()&& colliderY-y<getSize()&&dir==Dir.right) {
 				if(xm!=mapSize-1&&(allObjects[xm+1][ym]==null||allObjects[xm+1][ym].getType()==Type.EATABLE)) {
 					dir=y>ym*size?Dir.up:Dir.down;
 				}
@@ -116,16 +121,16 @@ public class Character extends GameObject implements Movable{
 					return;
 			}
 			
-			if(colliderY-getY()+getSize()==0&&x-colliderX<getSize()&&colliderX-x<getSize()&&dir==Dir.up) {
-				if(ym!=0&&allObjects[xm][ym-1]==null||(allObjects[xm][ym-1].getType()==Type.EATABLE)) {
+			if(colliderY-getY()+getSize()<=getSize()/2&&x-colliderX<getSize()&&colliderX-x<getSize()&&dir==Dir.up) {
+				if(ym!=0&&(allObjects[xm][ym-1]==null||allObjects[xm][ym-1].getType()==Type.EATABLE)) {
 					dir=x>xm*size?Dir.left:Dir.right;
 				}
 				else
 					return;
 			}
 			
-			if(colliderY-getY()-getSize()==0&&x-colliderX<getSize()&&colliderX-x<getSize()&&dir==Dir.down) {
-				if(ym!=mapSize-1&&allObjects[xm][ym+1]==null||(allObjects[xm][ym+1].getType()==Type.EATABLE)) {
+			if(getY()+getSize()-colliderY<=getSize()/2&&x-colliderX<getSize()&&colliderX-x<getSize()&&dir==Dir.down) {
+				if(ym!=mapSize-1&&(allObjects[xm][ym+1]==null||allObjects[xm][ym+1].getType()==Type.EATABLE)) {
 					dir=x>xm*size?Dir.left:Dir.right;
 				}
 				else
@@ -136,16 +141,16 @@ public class Character extends GameObject implements Movable{
 		//根据方向移动
 		switch(dir) {
 			case down:
-				setY(getY()+1);
+				setY(getY()+0.5);
 				break;
 			case up:
-				setY(getY()-1);
+				setY(getY()-0.5);
 				break;
 			case left:
-				setX(getX()-1);
+				setX(getX()-0.5);
 				break;
 			case right:
-				setX(getX()+1);
+				setX(getX()+0.5);
 				break;
 			default:
 				break;
