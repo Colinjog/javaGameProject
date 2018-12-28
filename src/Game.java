@@ -47,21 +47,18 @@ public class Game extends Application{
 		MapGenerator mapGenerator=MapGenerator.getMapGenerator();
 		mapGenerator.initMap("map1", pane);
 		
-		player = new Character("character.png",true,"Player1");
+		Character player = new Character("character.png",true,"Player1");
 
 		//
 		Character bot1 = new Character("character.png", false, "Bot1");
-		bot1.setHealth(100000);
-		bot1.setX(100);
-		bot1.setY(400);
+		bot1.setHealth(2);
+		bot1.setX(200);
+		bot1.setY(200);
 		AIController bot = new AIController(bot1);
 		
 		pane.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent event) {
-				if (player == null || player.getHealth() <= 0){
-					return;
-				}
 				// TODO Auto-generated method stub
 				
 				if(!keyStack.contains(event.getCode()))
@@ -72,6 +69,7 @@ public class Game extends Application{
 				switch(keyStack.lastElement()) {
 				case UP:
 					player.setDir(Movable.Dir.up);
+					
 					break;
 				case DOWN:
 				    player.setDir(Movable.Dir.down);
@@ -96,6 +94,7 @@ public class Game extends Application{
 			if (player==null ||player.getHealth()==0) {
 				return ;
 			}
+			
 			if(keyStack.isEmpty())
 				player.setDir(Movable.Dir.stop);
 			else {
@@ -119,12 +118,10 @@ public class Game extends Application{
 		});
 		
 		EventHandler<ActionEvent> eventHandler = e->{ //called every frame
-			
+			bot.act();
 			if (player != null && player.getHealth() != 0 && Game.status==1){
 				player.act();
 			}
-			bot.act();
-			
 			for(GameObject o:GameObject.objectsList) {
 				if (o!=player) {
 					o.act();

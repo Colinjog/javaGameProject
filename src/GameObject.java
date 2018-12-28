@@ -26,6 +26,10 @@ public abstract class GameObject {
 	protected Image image;//贴图
 	protected ImageView imageView;
 	
+	public void setImageView(ImageView imageView) {
+		this.imageView = imageView;
+	}
+
 	private boolean isDestroyed=false;
 	
 	public static int mapSize=20;//地图矩阵的大小
