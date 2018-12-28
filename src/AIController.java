@@ -78,7 +78,7 @@ public class AIController{
 				updateInEveryDir(valueMap, x, y, bombPower, bombScore);
 			}else if (blockType == GameObject.Type.FIREWORK){
 				valueMap[x][y] += fireworkScore;
-			}else if (blockType == GameObject.Type.BRICK){
+			}else if (blockType == GameObject.Type.BRICK && ((Brick)temp).getIsDestroyable()){
 				updateInEveryDir(valueMap, x, y, 1, brickScore);
 			}else if (blockType == GameObject.Type.EATABLE){
 				valueMap[x][y] += eatScore;
