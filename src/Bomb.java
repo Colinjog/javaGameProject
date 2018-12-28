@@ -49,7 +49,7 @@ public class Bomb extends GameObject{
 						tmpCharacter.setHealth(health);
 						//玩家被炸弹击中,但玩家还有生命
 						new FireWork(getXInMatrix(),getYInMatrix(),_imagePath);
-						
+						tmpCharacter.init();
 					}
 					else {
 						tmpCharacter.destroy();
@@ -66,6 +66,7 @@ public class Bomb extends GameObject{
 						health--;
 						tmpCharacter.setHealth(health);
 						new FireWork(getXInMatrix(),getYInMatrix(),_imagePath);
+						tmpCharacter.init();
 						//电脑玩家被炸弹击中,但电脑玩家还有生命
 					}
 					else {
@@ -110,7 +111,7 @@ public class Bomb extends GameObject{
 								tmpCharacter1.setHealth(health);
 								//玩家被炸弹击中,但玩家还有生命
 								new FireWork(getXInMatrix()+i,getYInMatrix(),_imagePath);
-								
+								tmpCharacter1.init();
 							}
 							else {
 								tmpCharacter1.destroy();
@@ -128,6 +129,7 @@ public class Bomb extends GameObject{
 								tmpCharacter1.setHealth(health);
 								new FireWork(getXInMatrix()+i,getYInMatrix(),_imagePath);
 								//电脑玩家被炸弹击中,但电脑玩家还有生命
+								tmpCharacter1.init();
 							}
 							else {
 								tmpCharacter1.setHealth(0);
@@ -196,7 +198,7 @@ public class Bomb extends GameObject{
 								tmpCharacter1.setHealth(health);
 								//玩家被炸弹击中,但玩家还有生命
 								new FireWork(getXInMatrix()-i,getYInMatrix(),_imagePath);
-								
+								tmpCharacter1.init();
 							}
 							else {
 								tmpCharacter1.destroy();
@@ -214,6 +216,7 @@ public class Bomb extends GameObject{
 								tmpCharacter1.setHealth(health);
 								new FireWork(getXInMatrix()-i,getYInMatrix(),_imagePath);
 								//电脑玩家被炸弹击中,但电脑玩家还有生命
+								tmpCharacter1.init();
 							}
 							else {
 								tmpCharacter1.setHealth(0);
@@ -287,7 +290,7 @@ public class Bomb extends GameObject{
 								tmpCharacter1.setHealth(health);
 								//玩家被炸弹击中,但玩家还有生命
 								new FireWork(getXInMatrix(),getYInMatrix()+i,_imagePath);
-								
+								tmpCharacter1.init();
 							}
 							else {
 								tmpCharacter1.destroy();
@@ -305,6 +308,7 @@ public class Bomb extends GameObject{
 								tmpCharacter1.setHealth(health);
 								new FireWork(getXInMatrix(),getYInMatrix()+i,_imagePath);
 								//电脑玩家被炸弹击中,但电脑玩家还有生命
+								tmpCharacter1.init();
 							}
 							else {
 								tmpCharacter1.destroy();
@@ -372,7 +376,7 @@ public class Bomb extends GameObject{
 								tmpCharacter1.setHealth(health);
 								//玩家被炸弹击中,但玩家还有生命
 								new FireWork(getXInMatrix(),getYInMatrix()-i,_imagePath);
-								
+								tmpCharacter1.init();
 							}
 							else {
 								tmpCharacter1.destroy();
@@ -389,6 +393,7 @@ public class Bomb extends GameObject{
 								tmpCharacter1.setHealth(health);
 								new FireWork(getXInMatrix(),getYInMatrix()-i,_imagePath);
 								//电脑玩家被炸弹击中,但电脑玩家还有生命
+								tmpCharacter1.init();
 							}
 							else {
 								tmpCharacter1.destroy();
