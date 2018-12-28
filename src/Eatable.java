@@ -8,8 +8,8 @@ public class Eatable extends GameObject{
 	
 	private Function func;
 	
-	public Eatable(int xInMatrix,int yInMatrix,String imagePath) {
-		super(xInMatrix*getSize(),yInMatrix*getSize(),imagePath);
+	public Eatable(int xInMatrix,int yInMatrix) {
+		super(xInMatrix*getSize(),yInMatrix*getSize(),"empty");
 		setType(GameObject.Type.EATABLE);
 		
 		this.setIsCollider(false);
@@ -20,22 +20,28 @@ public class Eatable extends GameObject{
 		getCollisionBody().setWidth(25);
 		getCollisionBody().setHeight(25);
 		
+		String imagePath="";
 		//随机生成道具种类
 		Random rand=new Random();
 		switch(rand.nextInt(4)) {
 		case 0:
 			func=Function.HEALTH;
+			imagePath = "/heart.gif";
 			break;
 		case 1:
 			func=Function.BOMB;
+			imagePath = "/bomb.png";
 			break;
 		case 2:
 			func=Function.POWER;
+			imagePath = "/power.png";
 			break;
 		case 3:
 			func=Function.SPEED;
+			imagePath = "/speed.png";
 			break;
 		}
+		this.setImage(imagePath);
 	}
 	
 	public Function getFunc() {return func;}
@@ -58,6 +64,7 @@ public class Eatable extends GameObject{
 					break;
 				case BOMB:
 					c.setBombNum(c.getBombNum()+1);
+					c.setMaxBombNum(c.getMaxBombNum()+1);
 					break;
 				case POWER:
 					c.setBombPower(c.getBombPower()+1);

@@ -45,16 +45,35 @@ public class Game extends Application{
 		Stack<KeyCode> keyStack = new Stack<KeyCode>();
 		
 		MapGenerator mapGenerator=MapGenerator.getMapGenerator();
-		mapGenerator.initMap("map1", pane);
+		mapGenerator.generateMap(pane);
 		
-		Character player = new Character("character.png",true,"Player1");
+		Character player = new Character("/player1.png", true, "Player1");
+		Text info=new Text(1010,50,"name:"+player.getName());
+		Text healthInfo=new Text(1010,100,"health:"+player.getHealth());
+		Text bombInfo=new Text(1010,150,"bomb:"+player.getBombNum()+"/"+player.getMaxBombNum());
+		Text powerInfo=new Text(1010,200,"power:"+player.getBombPower());
+		Text speedInfo=new Text(1010,250,"speed"+player.getSpeed());
+		
+		pane.getChildren().add(info);
+		pane.getChildren().add(healthInfo);
+		pane.getChildren().add(bombInfo);
+		pane.getChildren().add(powerInfo);
+		pane.getChildren().add(speedInfo);
+		
 
-		//
-		Character bot1 = new Character("character.png", false, "Bot1");
-		bot1.setHealth(2);
-		bot1.setX(200);
-		bot1.setY(200);
+		Character bot1 = new Character("player2.png", false, "Bot1");
+		bot1.setX(0);
+		bot1.setY(950);
+		//Character bot2 = new Character("character.png", false, "Bot2");
+		//Character bot3 = new Character("character.png", false, "Bot3");
+		//Character bot4 = new Character("character.png", false, "Bot4");
+		//bot2.setX(900);
+		//bot3.setY(900);
+
 		AIController bot = new AIController(bot1);
+		//bot.addBody(bot2);
+		//bot.addBody(bot3);
+		//bot.addBody(bot4);
 		
 		pane.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
@@ -63,9 +82,6 @@ public class Game extends Application{
 				
 				if(!keyStack.contains(event.getCode()))
 					keyStack.push(event.getCode());
-				if (player==null ||player.getHealth()==0) {
-					return ;
-				}
 				switch(keyStack.lastElement()) {
 				case UP:
 					player.setDir(Movable.Dir.up);
@@ -81,6 +97,10 @@ public class Game extends Application{
 					player.setDir(Movable.Dir.right);
 					break;
 				case SPACE:
+				for (int i=0;i<=1000000000;++i){
+					i+=1;
+					--i;
+				}
 					player.setBomb();
 					break;
 				default:
@@ -91,7 +111,7 @@ public class Game extends Application{
 		
 		pane.setOnKeyReleased(e->{
 			keyStack.removeElement(e.getCode());
-			if (player==null ||player.getHealth()==0) {
+			if (player==null || player.getHealth()==0) {
 				return ;
 			}
 			
@@ -118,6 +138,9 @@ public class Game extends Application{
 		});
 		
 		EventHandler<ActionEvent> eventHandler = e->{ //called every frame
+			if (Game.status == 0){ //Game Over
+				return;
+			}
 			bot.act();
 			if (player != null && player.getHealth() != 0 && Game.status==1){
 				player.act();
@@ -128,6 +151,11 @@ public class Game extends Application{
 				}
 			}
 			
+			healthInfo.setText("health:"+player.getHealth());
+			bombInfo.setText("bomb:"+player.getBombNum()+"/"+player.getMaxBombNum());
+			powerInfo.setText("power:"+player.getBombPower());
+			speedInfo.setText("speed"+player.getSpeed());
+			
 			Character.judgeGameOver();
 		};
 		
@@ -136,7 +164,7 @@ public class Game extends Application{
 		animation.setCycleCount(Timeline.INDEFINITE);
 		animation.play();
 		
-		Scene scene=new Scene(pane,1000,1000);
+		Scene scene=new Scene(pane,1300,1000);
 		
 		primaryStage.setTitle("Bomb It");
 		primaryStage.setScene(scene);
