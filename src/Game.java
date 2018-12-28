@@ -37,6 +37,7 @@ public class Game extends Application{
 	public static int status = 2;//0游戏结束
 							//1游戏进行中
 							//2游戏未开始
+	
 	public static ImageView player1[] = new ImageView[4];
 	public static ImageView player2[] = new ImageView[4];
 	public static ImageView player3[] = new ImageView[4];
@@ -66,11 +67,16 @@ public class Game extends Application{
 		player4[2] = new ImageView(image=new Image("right4.png",GameObject.size,GameObject.size,false,false));
 		player4[3] = new ImageView(image=new Image("back4.png",GameObject.size,GameObject.size,false,false));
 	}
+
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
 		initImage();
 		Pane pane=new Pane();
+		Rectangle background=new Rectangle(0,0,1000,1000);
+		background.setFill(Color.GREEN);
+		pane.getChildren().add(background);
+		
 		Game.status = 1;
 		GameObject.setPane(pane);
 		

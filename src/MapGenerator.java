@@ -31,7 +31,7 @@ public class MapGenerator {
 					if(tmp<34)
 						new Brick(i,j,true,"/DestroyableBrick.png");
 					else if(tmp>=34&&tmp<=67)
-						new Brick(i,j,false,"/brick.png");
+						new Brick(i,j,false,"/undestroyableBrick.png");
 				}
 			}
 		}

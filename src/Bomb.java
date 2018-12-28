@@ -40,6 +40,8 @@ public class Bomb extends GameObject{
 			int y = tmpCharacter.getYInMatrix();
 			if (x==this.getXInMatrix() && y==this.getYInMatrix()) {
 				isExist = true;
+				if(tmpCharacter.isProtected())
+					continue;
 				int health = tmpCharacter.getHealth();
 				if (tmpCharacter.isPlayer()) {
 					if (health>1) {
@@ -76,6 +78,8 @@ public class Bomb extends GameObject{
 						tmpCharacter = null;//删除character
 					}
 				}
+				if(tmpCharacter!=null)
+					tmpCharacter.setProtected();
 			}
 		}
 		destroy();//先在矩阵以及Pane中删除该对象，否则之后创建的新对象会替换掉矩阵中的该对象，图片就留在Pane上去不掉了。。
@@ -98,6 +102,8 @@ public class Bomb extends GameObject{
 					int y = tmpCharacter1.getYInMatrix();
 					if ((x==(i+this.getXInMatrix()))&&(y==this.getYInMatrix())) {
 						temp = true;
+						if(tmpCharacter1.isProtected())
+							continue;
 						int health = tmpCharacter1.getHealth();
 						if (tmpCharacter1.isPlayer()) {
 							if (health>1) {
@@ -134,6 +140,8 @@ public class Bomb extends GameObject{
 								tmpCharacter1 = null;//删除character
 							}
 						}
+						if(tmpCharacter1!=null)
+							tmpCharacter1.setProtected();
 					}
 				}
 				if (!temp) {
@@ -181,6 +189,8 @@ public class Bomb extends GameObject{
 					int y = tmpCharacter1.getYInMatrix();
 					if ((x==(this.getXInMatrix()-i))&&(y==this.getYInMatrix())) {
 						temp = true;
+						if(tmpCharacter1.isProtected())
+							continue;
 						int health = tmpCharacter1.getHealth();
 						if (tmpCharacter1.isPlayer()) {
 							if (health>1) {
@@ -217,6 +227,8 @@ public class Bomb extends GameObject{
 								tmpCharacter1 = null;//删除character
 							}
 						}
+						if(tmpCharacter1!=null)
+							tmpCharacter1.setProtected();
 					}
 				}
 				if (!temp) {
@@ -269,6 +281,8 @@ public class Bomb extends GameObject{
 					int y = tmpCharacter1.getYInMatrix();
 					if ((x==this.getXInMatrix())&&(y==(this.getYInMatrix()+i))) {
 						temp = true;
+						if(tmpCharacter1.isProtected())
+							continue;
 						int health = tmpCharacter1.getHealth();
 						if (tmpCharacter1.isPlayer()) {
 							if (health>1) {
@@ -305,6 +319,8 @@ public class Bomb extends GameObject{
 								tmpCharacter1 = null;//删除character
 							}
 						}
+						if(tmpCharacter1!=null)
+							tmpCharacter1.setProtected();
 					}
 				}
 				if (!temp) {
@@ -351,6 +367,8 @@ public class Bomb extends GameObject{
 					int y = tmpCharacter1.getYInMatrix();
 					if ((x==this.getXInMatrix())&&(y==(this.getYInMatrix()-i))) {
 						temp = true;
+						if(tmpCharacter1.isProtected())
+							continue;
 						int health = tmpCharacter1.getHealth();
 						if (tmpCharacter1.isPlayer()) {
 							if (health>1) {
@@ -386,6 +404,8 @@ public class Bomb extends GameObject{
 								tmpCharacter1 = null;//删除character
 							}
 						}
+						if(tmpCharacter1!=null)
+							tmpCharacter1.setProtected();
 					}
 				}
 				if (!temp) {
